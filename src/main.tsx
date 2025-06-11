@@ -1,14 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import '@/index.css'
+import App from '@/App.tsx'
 
-import Home from './pages/Home';
-import Playlists from './pages/Playlists';
-import TopArtists from './pages/TopArtists';
-import TopTracks from './pages/TopTracks';
-import NotFound from './pages/NotFound';
+import Home from '@/pages/Home';
+import Playlists from '@/pages/Playlists';
+import TopArtists from '@/pages/TopArtists';
+import TopTracks from '@/pages/TopTracks';
+import NotFound from '@/pages/NotFound';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import Callback from '@/pages/callback.tsx';
+import { AuthProvider } from './contexts/AuthProvider';
 
  const router = createBrowserRouter([
    {
@@ -27,10 +29,10 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
          path: 'top-tracks',
          element: <TopTracks />,
        },
-       // {
-       //   path: 'callback',
-       //   element: <Callback />,
-       // },
+       {
+         path: 'callback',
+         element: <Callback />,
+       },
        {
          path: 'playlists',
          element: <Playlists />,
@@ -53,6 +55,8 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
