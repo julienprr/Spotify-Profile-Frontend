@@ -1,4 +1,4 @@
-import apiClient from "../apiClient";
+import apiClient from './apiClient';
 
 export const getUserPlaylists = async () => {
   try {
@@ -64,21 +64,27 @@ export const copyUserPlaylist = async ({
   }
 };
 
-// export const getUserTopItem = async ({ options }: { options: TopItemOptions }) => {
-//   try {
-//     console.log(`Fetching top items for ${options.type}`);
-//     const params: { time_range?: string; limit?: number; offset?: number } = {};
-//     if (options.time_range) params.time_range = options.time_range;
-//     if (options.limit) params.limit = options.limit;
-//     if (options.offset) params.offset = options.offset;
+export const getUserTopTracks = async () => {
+  try {
+    const res = await apiClient.get(`/playlists/top/track`);
+    // console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.error('Error fetching user top tracks', error);
+    throw error;
+  }
+};
 
-//     const res = await apiClient.get(`/playlists/top/${options.type}`, { params });
-//     return res.data;
-//   } catch (error) {
-//     console.error('Error fetching top items', error);
-//     throw error;
-//   }
-// };
+export const getUserTopArtists = async () => {
+  try {
+    const res = await apiClient.get(`/playlists/top/artist`);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.error('Error fetching user top artists', error);
+    throw error;
+  }
+};
 
 export const addFavoritePlaylist = async ({ playlistId }: { playlistId: string }) => {
   try {
