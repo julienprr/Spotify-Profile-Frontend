@@ -22,14 +22,14 @@ const buttonVariants = cva(
         outlineRounded:
           'border-2 border-foreground text-foreground bg-transparent rounded-full hover:bg-foreground hover:text-background',
 
-        primary: 'bg-primary border text-foreground rounded-full hover:bg-primary/90 transition-colors',
+        primary: 'bg-primary text-foreground rounded-full hover:bg-primary/90 transition-colors',
       },
       size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
         sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-12 px-6 text-lg',
-        xl: 'h-13 px-10 text-lg',
-        xxl: 'h-18 px-14 text-xl tracking-widest font-bold',
+        xl: 'sm:h-13 sm:px-10 h-12 px-6 text-lg',
+        xxl: 'sm:h-18 sm:px-14 h-15 px-10 sm:text-xl text-xl tracking-widest font-bold',
         icon: 'size-9',
       },
     },
