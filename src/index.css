@@ -138,21 +138,20 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+html,
+body,
+#root {
+  height: 100%;
 }
 
-@layer utilities {
-  .text-primary {
-    color: var(--primary);
-  }
+.profile-image {
+  @apply mb-6 h-32 w-32 rounded-full object-cover sm:h-48 sm:w-48;
+}
 
-  .text-primary-foreground {
-    color: var(--primary-foreground);
-  }
+.stat-value {
+  @apply sm:text-2xl text-lg font-bold text-primary;
+}
+
+.stat-label {
+  @apply sm:text-lg tracking-wide text-muted-foreground;
 }
