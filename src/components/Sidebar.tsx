@@ -1,0 +1,72 @@
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import clsx from 'clsx';
+import spotifyLogo from '@/assets/images/spotify-logo.png'
+
+const links = [
+  { label: 'Profile', path: '/' },
+  { label: 'Top Artists', path: '/top-artists' },
+  { label: 'Top Tracks', path: '/top-tracks' },
+  { label: 'Playlists', path: '/playlists' },
+];
+
+const Sidebar = () => {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  const NavLinks = () => (
+    <nav className="flex flex-col space-y-8 px-6">
+      {links.map((link) => (
+        <Link
+          key={link.path}
+          to={link.path}
+          onClick={() => setOpen(false)}
+          className={clsx(
+            'text-lg transition-colors hover:text-primary text-foreground',
+            location.pathname === link.path && 'font-bold text-primary'
+          )}
+        >
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  );
+
+  return (
+    <>
+      {/* Mobile: Burger menu */}
+      <div className="fixed top-4 left-4 z-50 lg:hidden">
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="bigicon">
+              <Menu/>
+            </Button>
+          </SheetTrigger>
+          <SheetContent
+            side="left"
+            className="flex text-primary border-0 h-full w-full flex-col items-center justify-center text-center"
+          >
+            <NavLinks />
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:items-center lg:justify-between lg:bg-sidebar lg:px-6 lg:py-8 lg:text-foreground">
+        <div className="flex w-full justify-center">
+          <Link to="/" className="block w-20 mt-30">
+            <img src={spotifyLogo} alt="Spotify" className="w-full" />
+          </Link>
+        </div>
+        <div className="flex w-full flex-1 items-center justify-center">
+          <NavLinks />
+        </div>
+      </aside>
+    </>
+  );
+};
+
+export default Sidebar;

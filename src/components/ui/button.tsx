@@ -16,7 +16,7 @@ const buttonVariants = cva(
         outline:
           'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
         secondary: 'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 text-foreground font-bold',
 
         link: 'text-primary underline-offset-4 hover:underline',
         outlineRounded:
@@ -31,6 +31,7 @@ const buttonVariants = cva(
         xl: 'sm:h-13 sm:px-10 h-10 px-6',
         xxl: 'sm:h-18 sm:px-14 h-15 px-10 sm:text-xl text-xl tracking-widest font-bold',
         icon: 'size-9',
+        bigicon: 'size-9',
       },
     },
     defaultVariants: {
