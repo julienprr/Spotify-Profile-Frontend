@@ -59,10 +59,10 @@ const Home = () => {
                 <div className="mb-4 flex justify-between">
                   <h2 className="text-lg font-bold sm:text-3xl sm:tracking-wide">Top Artists</h2>
                   <Button
+                    onClick={() => navigate('/top-artists')}
                     variant="outlineRounded"
                     className="tracking-wide uppercase"
                     size={'xl'}
-                    onClick={() => navigate('/top-artists')}
                   >
                     See More
                   </Button>
@@ -73,7 +73,12 @@ const Home = () => {
               <div className="mt-10 sm:mt-0">
                 <div className="mb-4 flex items-center justify-between">
                   <h2 className="text-lg font-bold sm:text-3xl sm:tracking-wide">Top Tracks</h2>
-                  <Button variant="outlineRounded" className="tracking-wide uppercase" size={'xl'}>
+                  <Button
+                    onClick={() => navigate('/top-tracks')}
+                    variant="outlineRounded"
+                    className="tracking-wide uppercase"
+                    size={'xl'}
+                  >
                     See More
                   </Button>
                 </div>
