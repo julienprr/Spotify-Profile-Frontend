@@ -28,7 +28,6 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 0;
-  text-align: center;
 }
 
 @theme inline {
@@ -138,18 +137,12 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-html,
-body,
-#root {
-  height: 100%;
-}
-
 .profile-image {
-  @apply mb-6 h-32 w-32 rounded-full object-cover sm:h-48 sm:w-48;
+  @apply sm:mb-6 h-24 w-24 rounded-full object-cover sm:h-48 sm:w-48;
 }
 
 .stat-value {
-  @apply sm:text-2xl text-lg font-bold text-primary;
+  @apply sm:text-2xl font-bold text-primary;
 }
 
 .stat-label {

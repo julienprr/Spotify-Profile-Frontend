@@ -1,3 +1,5 @@
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+
 export type TrackProps = {
   id: string;
   name: string;
@@ -24,13 +26,15 @@ const ExplicitIcon = () => {
 };
 
 const Track = ({ track }: { track: TrackProps }) => {
+  const breakpoint = useBreakpoint();
+
   return (
-    <div className="grid sm:grid-cols-3 items-center gap-4">
+    <div className="grid items-center gap-4 sm:grid-cols-2">
       {/* Images, track, artist, album */}
       <div className="flex flex-row items-center space-x-2">
         <div key={track.id} className="shrink-0">
-          <div className="w-12 sm:w-[60px] overflow-hidden rounded-sm">
-            <img src={track.imageUrl} alt={track.name} className="w-full h-auto object-cover" />
+          <div className="w-12 overflow-hidden rounded-sm sm:w-[60px]">
+            <img src={track.imageUrl} alt={track.name} className="h-auto w-full object-cover" />
           </div>
         </div>
 
@@ -45,9 +49,11 @@ const Track = ({ track }: { track: TrackProps }) => {
       </div>
 
       {/* Duration */}
-      <div className="col-span-2 flex flex-row items-center justify-end">
-        <span className="text-sm font-normal text-foreground">{formatDuration(track.duration)}</span>
-      </div>
+      {breakpoint !== 'mobile' && (
+        <div className="col-span-1 flex flex-row items-center justify-end">
+          <span className="text-sm font-normal text-foreground">{formatDuration(track.duration)}</span>
+        </div>
+      )}
     </div>
   );
 };
