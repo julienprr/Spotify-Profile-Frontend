@@ -2,7 +2,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import '@/index.css'
 import App from '@/App.tsx'
-
 import Home from '@/pages/Home';
 import Playlists from '@/pages/Playlists';
 import TopArtists from '@/pages/TopArtists';

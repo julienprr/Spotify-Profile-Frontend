@@ -8,11 +8,11 @@ import TrackList from '@/components/track/TrackList';
 import { useTopArtists } from '@/hooks/useTopArtists';
 import ArtistList from '@/components/artist/ArtistList';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const { isAuthenticated, setIsAuthenticated, userProfile } = useAuth();
   const { artists, isLoading: isLoadingArtists } = useTopArtists('short_term');
-
   const { tracks, isLoading: isLoadingTracks } = useTopTracks('short_term');
 
   const breakpoint = useBreakpoint();
@@ -20,8 +20,9 @@ const Home = () => {
   const maxTrackItems = breakpoint === 'mobile' ? 5 : breakpoint === 'tablet' ? 8 : 17;
 
   const displayedArtists = artists?.slice(0, maxArtistItems);
-
   const displayedTracks = tracks?.slice(0, maxTrackItems);
+
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     window.location.href = `${API_URL}/spotify-auth/login`;
@@ -56,8 +57,13 @@ const Home = () => {
             <div className="mt-10 gap-20 sm:mx-10 sm:mt-20 lg:grid lg:grid-cols-2">
               <div className="mb-6">
                 <div className="mb-4 flex justify-between">
-                  <h2 className="text-lg font-bold sm:text-3xl sm:tracking-wide">Top Tracks</h2>
-                  <Button variant="outlineRounded" className="tracking-wide uppercase" size={'xl'}>
+                  <h2 className="text-lg font-bold sm:text-3xl sm:tracking-wide">Top Artists</h2>
+                  <Button
+                    variant="outlineRounded"
+                    className="tracking-wide uppercase"
+                    size={'xl'}
+                    onClick={() => navigate('/top-artists')}
+                  >
                     See More
                   </Button>
                 </div>

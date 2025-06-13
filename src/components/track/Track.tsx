@@ -29,7 +29,7 @@ const Track = ({ track }: { track: TrackProps }) => {
   const breakpoint = useBreakpoint();
 
   return (
-    <div className="grid items-center gap-4 sm:grid-cols-2">
+    <div className="flex flex-row justify-between">
       {/* Images, track, artist, album */}
       <div className="flex flex-row items-center space-x-2">
         <div key={track.id} className="shrink-0">
