@@ -50,7 +50,7 @@ const Home = () => {
               playlists={176}
             />
 
-            <Button onClick={handleLogout} variant="outlineRounded" className="tracking-wide uppercase" size={'xl'}>
+            <Button onClick={handleLogout} variant="outlineRounded" className="uppercase" size={'xl'}>
               logout
             </Button>
 
@@ -62,7 +62,7 @@ const Home = () => {
                     onClick={() => navigate('/top-artists')}
                     variant="outlineRounded"
                     className="tracking-wide uppercase"
-                    size={'xl'}
+                    size={'lg'}
                   >
                     See More
                   </Button>
@@ -71,13 +71,13 @@ const Home = () => {
               </div>
 
               <div className="mt-10 sm:mt-0">
-                <div className="mb-4 flex items-center justify-between">
+                <div className="mb-4 flex justify-between">
                   <h2 className="text-lg font-bold sm:text-3xl sm:tracking-wide">Top Tracks</h2>
                   <Button
                     onClick={() => navigate('/top-tracks')}
                     variant="outlineRounded"
                     className="tracking-wide uppercase"
-                    size={'xl'}
+                    size={'lg'}
                   >
                     See More
                   </Button>

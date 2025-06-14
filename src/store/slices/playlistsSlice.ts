@@ -1,18 +1,10 @@
-import { getUserPlaylists } from '@/api/play-manager/playlist.service';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
+import { getUserPlaylists } from '@/api/play-manager.service';
+import type { PlaylistProps } from '@/components/playlist/Playlist';
 
-interface Playlist {
-  id: string;
-  name: string;
-  tracksNumber: string;
-  ownerName: string;
-  imageUrl?: string;
-  isFavorite: boolean;
-}
 
 interface PlaylistsState {
-  items: Playlist[];
+  items: PlaylistProps[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -28,18 +20,6 @@ export const fetchPlaylists = createAsyncThunk('playlists/fetchPlaylists', async
   return response.data.playlists;
 });
 
-export const selectTopPlaylists = (state: RootState) => {
-  const data = [...state.playlists.items];
-
-  const sortedData = data.sort((a: Playlist, b: Playlist) => {
-    return (b.isFavorite ? 1 : 0) - (a.isFavorite ? 1 : 0);
-  });
-
-  const slicedData = sortedData.slice(0, 5);
-
-  return slicedData;
-};
-
 const playlistsSlice = createSlice({
   name: 'playlists',
   initialState,
@@ -51,7 +31,7 @@ const playlistsSlice = createSlice({
       .addCase(fetchPlaylists.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchPlaylists.fulfilled, (state, action: PayloadAction<Playlist[]>) => {
+      .addCase(fetchPlaylists.fulfilled, (state, action: PayloadAction<PlaylistProps[]>) => {
         state.status = 'succeeded';
         state.items = action.payload;
       })
