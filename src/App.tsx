@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Provider store={store}>
           <Outlet />
         </Provider>
+        <Footer />
       </main>
     </div>
   );
