@@ -10,7 +10,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthProvider';
-import PlaylistDetails from './pages/PlaylistDetails';
+import PlaylistDetails from './pages/playlistDetails/PlaylistDetails';
 
  const router = createBrowserRouter([
    {

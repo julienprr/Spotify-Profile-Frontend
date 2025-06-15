@@ -12,6 +12,7 @@ export type PlaylistProps = {
   autoSort: boolean;
   tracks?: any;
 };
+
 export type PlaylistSummary = Omit<PlaylistProps, 'tracks'>;
 
 export type PlaylistDetails = PlaylistProps & { tracks: TrackProps[] };

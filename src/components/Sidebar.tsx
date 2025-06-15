@@ -1,11 +1,10 @@
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import githubLogo from '@/assets/images/github-logo-white.png';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import clsx from 'clsx';
-import spotifyLogo from '@/assets/images/spotify-logo.png'
-import githubLogo from '@/assets/images/github-logo-white.png'
+import { Menu } from 'lucide-react';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const links = [
   { label: 'Profile', path: '/' },
@@ -26,7 +25,7 @@ const Sidebar = () => {
           to={link.path}
           onClick={() => setOpen(false)}
           className={clsx(
-            'text-lg transition-colors hover:text-primary text-foreground',
+            'text-lg text-foreground transition-colors hover:text-primary',
             location.pathname === link.path && 'font-bold text-primary'
           )}
         >
@@ -46,9 +45,13 @@ const Sidebar = () => {
               <Menu />
             </Button>
           </SheetTrigger>
+          <SheetTitle className="sr-only">
+            menu
+          </SheetTitle>
+          <SheetDescription className='sr-only'>navigation menu for the app</SheetDescription>
           <SheetContent
             side="left"
-            className="flex h-full w-full flex-col items-center justify-center border-0 text-center text-primary pt-20"
+            className="flex h-full w-full flex-col items-center justify-center border-0 pt-20 text-center text-primary"
           >
             <NavLinks />
             <div className="flex w-full justify-center">

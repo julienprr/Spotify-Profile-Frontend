@@ -22,7 +22,7 @@ export const getUserPlaylistById = async ({ playlistId }: { playlistId: string }
   }
 };
 
-export const reorganizeUserPlaylist = async ({ playlistId }: { playlistId: string }) => {
+export const SortPlaylistByReleaseDate = async ({ playlistId }: { playlistId: string }) => {
   try {
     console.log(`Reorganizing playlist with ID: ${playlistId}`);
     const res = await apiClient.post('/playlists/reorganize/', { playlistId });
@@ -33,7 +33,18 @@ export const reorganizeUserPlaylist = async ({ playlistId }: { playlistId: strin
   }
 };
 
-export const cleanUserPlaylist = async ({ playlistId }: { playlistId: string }) => {
+export const shufflePlaylist = async ({ playlistId }: { playlistId: string }) => {
+  try {
+    console.log(`Shuffling playlist with ID: ${playlistId}`);
+    const res = await apiClient.delete(`/playlists/shuffle/${playlistId}`);
+    return res.data;
+  } catch (error) {
+    console.error('Error shuffling playlist', error);
+    throw error;
+  }
+};
+
+export const clearPlaylist = async ({ playlistId }: { playlistId: string }) => {
   try {
     console.log(`Cleaning playlist with ID: ${playlistId}`);
     const res = await apiClient.delete(`/playlists/clean/${playlistId}`);
@@ -44,7 +55,7 @@ export const cleanUserPlaylist = async ({ playlistId }: { playlistId: string }) 
   }
 };
 
-export const copyUserPlaylist = async ({
+export const copyPlaylist = async ({
   playlistSourceId,
   playlistDestinationId,
 }: {
