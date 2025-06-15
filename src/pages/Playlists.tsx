@@ -24,7 +24,7 @@ const Playlists = () => {
         <ThemeToggle />
           <h1 className="text-6xl font-semibold mb-20">My Playlists</h1>
 
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-10">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10">
             {playlists.map((item: PlaylistProps) => (
               <PlaylistCover key={item.id} playlist={item} isLoading={isLoading} />
             ))}

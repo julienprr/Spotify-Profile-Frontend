@@ -1,12 +1,4 @@
-export type PlaylistProps = {
-  id: string;
-  name: string;
-  tracksNumber: string;
-  ownerName: string;
-  imageUrl: string;
-  isFavorite: boolean;
-  autoSort: boolean;
-};
+import type { PlaylistProps } from "@/types/playlist";
 
 const Playlist = ({ playlist }: { playlist: PlaylistProps }) => {
   return (
@@ -21,7 +13,7 @@ const Playlist = ({ playlist }: { playlist: PlaylistProps }) => {
         <div className="flex flex-col items-start">
           <div className="truncate text-sm font-bold text-foreground">{playlist.name}</div>
           <div className="flex flex-row items-center space-x-1">
-            <span className="text-sm font-normal text-muted-foreground">{playlist.tracksNumber} tracks</span>
+            <span className="text-sm font-normal text-muted-foreground">{playlist.totalTracks} tracks</span>
           </div>
         </div>
       </div>

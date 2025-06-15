@@ -2,7 +2,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 export type TrackProps = {
   id: string;
-  name: string;
+  name?: string;
   artistName: string;
   albumName: string;
   isExplicit: boolean;

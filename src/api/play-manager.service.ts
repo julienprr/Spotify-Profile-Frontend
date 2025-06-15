@@ -11,11 +11,11 @@ export const getUserPlaylists = async () => {
   }
 };
 
-export const getSingleUserPlaylist = async ({ playlistId }: { playlistId: string }) => {
+export const getUserPlaylistById = async ({ playlistId }: { playlistId: string }) => {
   try {
     console.log(`Fetching playlist with ID: ${playlistId}`);
     const res = await apiClient.get(`/playlists/${playlistId}`);
-    return res.data;
+    return res;
   } catch (error) {
     console.error('Error fetching playlist', error);
     throw error;

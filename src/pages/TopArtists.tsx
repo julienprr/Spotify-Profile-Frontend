@@ -37,7 +37,7 @@ const TopArtists = () => {
             <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
           </div>
 
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-10">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10">
             {artists.map((item: ArtistProps) => (
               <ArtistAvatar key={item.id} artist={item} />
             ))}

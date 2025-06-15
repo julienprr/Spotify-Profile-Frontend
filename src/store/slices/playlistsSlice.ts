@@ -1,16 +1,18 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { getUserPlaylists } from '@/api/play-manager.service';
-import type { PlaylistProps } from '@/components/playlist/Playlist';
+import { getUserPlaylistById, getUserPlaylists } from '@/api/play-manager.service';
+import type { PlaylistDetails, PlaylistProps, PlaylistSummary } from '@/types/playlist';
 
 
 interface PlaylistsState {
-  items: PlaylistProps[];
+  items: PlaylistSummary[];
+  selected: Record<string, PlaylistDetails>
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
 const initialState: PlaylistsState = {
   items: [],
+  selected: {},
   status: 'idle',
   error: null,
 };
@@ -18,6 +20,13 @@ const initialState: PlaylistsState = {
 export const fetchPlaylists = createAsyncThunk('playlists/fetchPlaylists', async () => {
   const response = await getUserPlaylists();
   return response.data.playlists;
+});
+
+export const fetchPlaylistById = createAsyncThunk('playlists/fetchById', async (id: string) => {
+  const response = await getUserPlaylistById({ playlistId: id });
+  console.log("PLAYLIST", response.data.playlist);
+
+  return response.data.playlist;
 });
 
 const playlistsSlice = createSlice({
@@ -38,7 +47,10 @@ const playlistsSlice = createSlice({
       .addCase(fetchPlaylists.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch playlists';
-      });
+      })
+      .addCase(fetchPlaylistById.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
+        state.selected[action.payload.id] = action.payload;
+      })
   },
 });
 

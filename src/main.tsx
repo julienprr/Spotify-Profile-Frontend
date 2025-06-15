@@ -10,6 +10,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthProvider';
+import PlaylistDetails from './pages/PlaylistDetails';
 
  const router = createBrowserRouter([
    {
@@ -36,10 +37,10 @@ import { AuthProvider } from './contexts/AuthProvider';
          path: 'playlists',
          element: <Playlists />,
        },
-       // {
-       //   path: 'playlist/:id',
-       //   element: <PlaylistDetails />,
-       // },
+       {
+         path: 'playlist/:id',
+         element: <PlaylistDetails />,
+       },
        {
          path: 'not-found',
          element: <NotFound />,
