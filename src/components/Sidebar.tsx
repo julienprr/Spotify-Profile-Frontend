@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import clsx from 'clsx';
 import spotifyLogo from '@/assets/images/spotify-logo.png'
+import githubLogo from '@/assets/images/github-logo-white.png'
 
 const links = [
   { label: 'Profile', path: '/' },
@@ -42,27 +43,39 @@ const Sidebar = () => {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="bigicon">
-              <Menu/>
+              <Menu />
             </Button>
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="flex text-primary border-0 h-full w-full flex-col items-center justify-center text-center"
+            className="flex h-full w-full flex-col items-center justify-center border-0 text-center text-primary pt-20"
           >
             <NavLinks />
+            <div className="flex w-full justify-center">
+              <Link to="/" className="mt-30 block w-20">
+                <img src={githubLogo} alt="Spotify" className="w-full" />
+              </Link>
+            </div>
           </SheetContent>
         </Sheet>
       </div>
 
       {/* Desktop sidebar */}
-      <aside className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:items-center lg:justify-between lg:bg-sidebar lg:px-6 lg:py-8 lg:text-foreground">
-        <div className="flex w-full justify-center">
-          <Link to="/" className="block w-20 mt-30">
-            <img src={spotifyLogo} alt="Spotify" className="w-full" />
-          </Link>
-        </div>
-        <div className="flex w-full flex-1 items-center justify-center">
+      <aside className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:bg-sidebar lg:px-6 lg:py-8 lg:text-foreground">
+        <div className="flex flex-1 flex-col items-center justify-center">
           <NavLinks />
+        </div>
+
+        <div className="flex w-full justify-center">
+          <a
+            href="https://github.com/julienprr/spotify-profile-frontend"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Go to repository"
+            className="block w-20"
+          >
+            <img src={githubLogo} alt="GitHub" className="w-full" />
+          </a>
         </div>
       </aside>
     </>
