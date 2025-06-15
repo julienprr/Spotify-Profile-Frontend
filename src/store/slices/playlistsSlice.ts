@@ -2,10 +2,9 @@ import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/tool
 import { getUserPlaylistById, getUserPlaylists } from '@/api/play-manager.service';
 import type { PlaylistDetails, PlaylistProps, PlaylistSummary } from '@/types/playlist';
 
-
 interface PlaylistsState {
   items: PlaylistSummary[];
-  selected: Record<string, PlaylistDetails>
+  selected: Record<string, PlaylistDetails>;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -19,22 +18,20 @@ const initialState: PlaylistsState = {
 
 export const fetchPlaylists = createAsyncThunk('playlists/fetchPlaylists', async () => {
   const response = await getUserPlaylists();
-  return response.data.playlists;
+  return response.playlists;
 });
 
 export const fetchPlaylistById = createAsyncThunk('playlists/fetchById', async (id: string) => {
   const response = await getUserPlaylistById({ playlistId: id });
-  console.log("PLAYLIST", response.data.playlist);
+  console.log('PLAYLIST', response.data.playlist);
 
-  return response.data.playlist;
+  return response.playlist;
 });
 
 const playlistsSlice = createSlice({
   name: 'playlists',
   initialState,
-  reducers: {
-    // Actions pour ajouter, copier ou modifier les playlists si nécessaire
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchPlaylists.pending, (state) => {
@@ -48,9 +45,16 @@ const playlistsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch playlists';
       })
+      .addCase(fetchPlaylistById.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(fetchPlaylistById.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
         state.selected[action.payload.id] = action.payload;
       })
+      .addCase(fetchPlaylistById.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'Failed to fetch playlist by ID';
+      });
   },
 });
 

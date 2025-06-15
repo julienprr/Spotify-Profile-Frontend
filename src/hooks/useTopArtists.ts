@@ -1,18 +1,22 @@
 
-import { getUserTopArtists } from '@/api/play-manager.service';
-import type { ArtistProps } from '@/components/artist/Artist';
-import { useEffect, useState } from 'react';
+import { fetchTopArtists } from '@/store/slices/artistsSlice';
+import type { AppDispatch, RootState } from '@/store/store';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const useTopArtists = (timeRange: 'short_term' | 'medium_term' | 'long_term' = 'short_term') => {
-  const [artists, setArtists] = useState<ArtistProps[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    getUserTopArtists()
-      .then((res) => setArtists(res[timeRange] || []))
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
-  }, [timeRange]);
+  const { items, status, error } = useSelector((state: RootState) => state.artists);
+  const artists = items[timeRange] || [];
 
-  return { artists, isLoading };
+   useEffect(() => {
+     if (status === 'idle') {
+       dispatch(fetchTopArtists());
+     }
+   }, [status, dispatch]);
+
+   const isLoading = status === 'loading';
+
+   return { artists, status, error, isLoading };
 };

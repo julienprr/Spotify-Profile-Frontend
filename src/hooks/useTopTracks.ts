@@ -1,17 +1,20 @@
-import { getUserTopTracks } from '@/api/play-manager.service';
-import type { TrackProps } from '@/components/track/Track';
-import { useEffect, useState } from 'react';
+import { fetchTopTracks } from '@/store/slices/tracksSlice';
+import type { AppDispatch, RootState } from '@/store/store';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const useTopTracks = (timeRange: 'short_term' | 'medium_term' | 'long_term' = 'short_term') => {
-  const [tracks, setTracks] = useState<TrackProps[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch<AppDispatch>();
+  const { items, status, error } = useSelector((state: RootState) => state.tracks);
+  const tracks = items[timeRange] || [];
 
   useEffect(() => {
-    getUserTopTracks()
-      .then((res) => setTracks(res[timeRange] || []))
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
-  }, [timeRange]);
+    if (status === 'idle') {
+      dispatch(fetchTopTracks());
+    }
+  }, [status, dispatch]);
 
-  return { tracks, isLoading };
+  const isLoading = status === 'loading';
+
+  return { tracks, status, error, isLoading };
 };

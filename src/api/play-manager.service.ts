@@ -4,7 +4,7 @@ export const getUserPlaylists = async () => {
   try {
     console.log('Fetching user playlists...');
     const res = await apiClient.get('/playlists');
-    return res;
+    return res.data;
   } catch (error) {
     console.error('Error fetching playlists', error);
     throw error;
@@ -15,7 +15,7 @@ export const getUserPlaylistById = async ({ playlistId }: { playlistId: string }
   try {
     console.log(`Fetching playlist with ID: ${playlistId}`);
     const res = await apiClient.get(`/playlists/${playlistId}`);
-    return res;
+    return res.data;
   } catch (error) {
     console.error('Error fetching playlist', error);
     throw error;
@@ -67,7 +67,6 @@ export const copyUserPlaylist = async ({
 export const getUserTopTracks = async () => {
   try {
     const res = await apiClient.get(`/playlists/top/track`);
-    // console.log(res.data);
     return res.data;
   } catch (error) {
     console.error('Error fetching user top tracks', error);
@@ -78,7 +77,6 @@ export const getUserTopTracks = async () => {
 export const getUserTopArtists = async () => {
   try {
     const res = await apiClient.get(`/playlists/top/artist`);
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error('Error fetching user top artists', error);
