@@ -32,15 +32,15 @@ const TopArtists = () => {
     return (
       <div className="flex min-h-screen flex-col overflow-x-hidden bg-background px-4 pt-20 text-foreground">
         <ThemeToggle />
-          <div className="mb-20 flex justify-between">
-            <h1 className="text-6xl font-semibold">Top Artists</h1>
-            <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
-          </div>
+        <div className="mb-20 flex justify-between">
+          <h1 className="text-6xl font-semibold">Top Artists</h1>
+          <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
+        </div>
 
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10">
-            {artists.map((item: ArtistProps) => (
-              <ArtistAvatar key={item.id} artist={item} />
-            ))}
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10">
+          {artists.map((item: ArtistProps) => (
+            <ArtistAvatar key={item.id} artist={item} isLoading={isLoading} />
+          ))}
         </div>
       </div>
     );

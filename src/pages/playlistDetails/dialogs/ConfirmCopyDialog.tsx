@@ -11,23 +11,23 @@ import {
 import type { PlaylistProps } from '@/types/playlist';
 
 interface ConfirmCopyDialogProps {
-  isCopyDialogOpen: boolean;
-  setIsCopyDialogOpen: (open: boolean) => void;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
   handleCopyPlaylist: (playlistDestinationId: string) => void;
   playlist: PlaylistProps;
   playlists: PlaylistProps[];
 }
 
 const ConfirmCopyDialog = ({
-  isCopyDialogOpen,
-  setIsCopyDialogOpen,
+  isOpen,
+  setIsOpen,
   handleCopyPlaylist,
   playlist,
   playlists,
 }: ConfirmCopyDialogProps) => {
   return (
-    <Dialog open={isCopyDialogOpen} onOpenChange={setIsCopyDialogOpen}>
-      <DialogContent className="sm:max-w-[425px]">
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="rounded-lg border border-muted bg-background text-foreground shadow-xl sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Copier la Playlist {playlist.name}</DialogTitle>
           <DialogDescription>Choisissez dans quelle playlist copier les titres.</DialogDescription>
@@ -35,16 +35,16 @@ const ConfirmCopyDialog = ({
 
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-2 gap-2">
-            <Button  onClick={() => handleCopyPlaylist('liked-tracks')}>
+            <Button variant="accent" onClick={() => handleCopyPlaylist('liked-tracks')}>
               Titres likés
             </Button>
 
-            <Button onClick={() => handleCopyPlaylist('new-playlist')}>
+            <Button variant="accent" onClick={() => handleCopyPlaylist('new-playlist')}>
               Nouvelle playlist
             </Button>
 
             {playlists.map((p) => (
-              <Button key={p.id} variant="default" onClick={() => handleCopyPlaylist(p.id)}>
+              <Button key={p.id} variant="secondary" className="truncate" onClick={() => handleCopyPlaylist(p.id)}>
                 {p.name}
               </Button>
             ))}
@@ -53,9 +53,7 @@ const ConfirmCopyDialog = ({
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="destructive">
-              Annuler
-            </Button>
+            <Button variant="destructive">Annuler</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

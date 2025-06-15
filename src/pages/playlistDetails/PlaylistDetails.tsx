@@ -15,7 +15,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { usePlaylistActions } from '@/hooks/usePlaylistActions';
 import type { RootState } from '@/store/store';
 import type { PlaylistDetails } from '@/types/playlist';
-import { Heart } from 'lucide-react';
+import { Heart, ListMusic } from 'lucide-react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { usePlaylist } from '@/hooks/usePlaylist';
@@ -41,11 +41,7 @@ const Actions = ({
 }) => {
   return (
     <div className="my-4 flex flex-row items-center gap-4">
-      <Button
-        onClick={handleToggleFavorite}
-        variant="secondary"
-        className="flex items-center gap-2 rounded-full px-4 py-2"
-      >
+      <Button onClick={handleToggleFavorite} variant="action">
         {isFavorite ? (
           <>
             <Heart className="h-4 w-4 fill-primary text-primary" />
@@ -60,9 +56,12 @@ const Actions = ({
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline">Gérer</Button>
+          <Button variant="action">
+            <ListMusic className="h-4 w-4 text-foreground" />
+            Manage
+          </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
+        <DropdownMenuContent className="w-56 rounded-lg border border-muted bg-background shadow-xl">
           <DropdownMenuGroup>
             <DropdownMenuSub>
               <DropdownMenuItem onClick={() => setIsCopyDialogOpen(true)}>Copy</DropdownMenuItem>
@@ -70,9 +69,9 @@ const Actions = ({
             </DropdownMenuSub>
 
             <DropdownMenuSub>
-              <DropdownMenuSubTrigger>Réoganiser</DropdownMenuSubTrigger>
+              <DropdownMenuSubTrigger>Reorder</DropdownMenuSubTrigger>
               <DropdownMenuPortal>
-                <DropdownMenuSubContent>
+                <DropdownMenuSubContent className="w-56 rounded-lg border border-muted bg-background shadow-xl">
                   <DropdownMenuItem onClick={handleSortPlaylist}>Sort by release date</DropdownMenuItem>
                   <DropdownMenuItem onClick={handleshufflePlaylist}>Shuffle playlist</DropdownMenuItem>
                 </DropdownMenuSubContent>
@@ -102,6 +101,7 @@ const PlaylistDetails = () => {
   const onCopyPlaylist = (destinationId: string) => {
     if (id) {
       copyPlaylist({ playlistSourceId: id, playlistDestinationId: destinationId });
+      setIsCopyDialogOpen(false);
     }
   };
 
@@ -112,12 +112,10 @@ const PlaylistDetails = () => {
     return <div className="bg-background p-4 text-foreground">ID de playlist invalide.</div>;
   }
 
-  // Step 1 — Charge la playlist si pas déjà faite (effet de bord uniquement)
   usePlaylist(id!);
-
-  // Step 2 — Sélection dynamique pour suivre les updates du store
   const playlist = useSelector((state: RootState) => state.playlists.selected[id!]) as PlaylistDetails | undefined;
   console.log('Playlist selected:', playlist);
+
   if (!playlist) {
     return <div className="bg-background p-4 text-foreground">Playlist introuvable.</div>;
   }
@@ -151,8 +149,8 @@ const PlaylistDetails = () => {
           onConfirm={() => handleClearPlaylist(id)}
         />
         <ConfirmCopyDialog
-          isCopyDialogOpen={isCopyDialogOpen}
-          setIsCopyDialogOpen={setIsCopyDialogOpen}
+          isOpen={isCopyDialogOpen}
+          setIsOpen={setIsCopyDialogOpen}
           handleCopyPlaylist={onCopyPlaylist}
           playlist={playlist}
           playlists={playlists}
@@ -184,8 +182,8 @@ const PlaylistDetails = () => {
           onConfirm={() => handleClearPlaylist(id)}
         />
         <ConfirmCopyDialog
-          isCopyDialogOpen={isCopyDialogOpen}
-          setIsCopyDialogOpen={setIsCopyDialogOpen}
+          isOpen={isCopyDialogOpen}
+          setIsOpen={setIsCopyDialogOpen}
           handleCopyPlaylist={onCopyPlaylist}
           playlist={playlist}
           playlists={playlists}

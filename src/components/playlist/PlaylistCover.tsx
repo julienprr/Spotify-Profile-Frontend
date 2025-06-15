@@ -4,6 +4,7 @@ import type React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import PlaylistCoverSkeleton from './PlaylistCoverSkeleton';
+import DefaultPlaylistCover from "@/assets/images/default_playlist_cover.jpg"
 
 type PlaylistCoverProps = {
   playlist: PlaylistProps;
@@ -34,7 +35,7 @@ const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, vari
         )}
       >
         <img
-          src={playlist.imageUrl}
+          src={playlist.imageUrl ?? DefaultPlaylistCover}
           alt={playlist.name}
           className="h-full w-full object-cover transition-transform duration-300"
         />

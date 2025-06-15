@@ -165,6 +165,14 @@ const playlistsSlice = createSlice({
         if (state.selected[updated.id]) {
           state.selected[updated.id].isFavorite = false;
         }
+      })
+      .addCase(clearUserPlaylist.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
+        const updated = action.payload;
+        if (!updated) return;
+
+        if (state.selected[updated.id]) {
+          state.selected[updated.id] = updated;
+        }
       });
   },
 });

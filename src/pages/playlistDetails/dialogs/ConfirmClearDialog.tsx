@@ -21,19 +21,21 @@ const ConfirmClearDialog = ({ onConfirm, isOpen, setIsOpen }: ConfirmClearDialog
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className='text-foreground'>Êtes-vous sûr de vouloir supprimer le contenu de la Playlist ?</AlertDialogTitle>
+          <AlertDialogTitle className="text-foreground">
+            Êtes-vous sûr de vouloir supprimer le contenu de la Playlist ?
+          </AlertDialogTitle>
           <AlertDialogDescription>
             Cette action ne peut pas être annulée. Cela supprimera définitivement les titres de cette Playlist.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel asChild>
-            <Button variant="outline">Annuler</Button>
+            <Button>Annuler</Button>
           </AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
               variant="destructive"
-              // className='bg-destructive'
+              className="bg-red-500 text-white"
               onClick={() => {
                 setIsOpen(false);
                 onConfirm();
