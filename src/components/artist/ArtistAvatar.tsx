@@ -32,7 +32,7 @@ const ArtistAvatar: React.FC<ArtistAvatarProps> = ({ artist, isLoading, variant 
       className={cn(
         'flex flex-col items-center gap-2 text-center transition-transform',
         variant === 'grid' && 'w-[200px] cursor-pointer hover:scale-105',
-        variant === 'default' && 'w-[200px] sm:w-[300px]'
+        variant === 'default' && 'w-[150px] sm:w-[300px]'
       )}
       onClick={() => variant === 'grid' && navigate(`/artist/${artist.id}`)}
     >

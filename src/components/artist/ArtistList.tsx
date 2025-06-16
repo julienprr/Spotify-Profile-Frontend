@@ -1,6 +1,6 @@
 import ArtistSkeleton from './ArtistSkeleton';
-import type { ArtistProps } from './Artist';
 import Artist from './Artist';
+import type { ArtistProps } from '@/types/artist';
 
 const ArtistList = ({ items, isLoading }: { items: ArtistProps[]; isLoading: boolean }) => {
 
