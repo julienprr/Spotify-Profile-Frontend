@@ -1,10 +1,10 @@
-import type { ArtistProps } from '@/components/artist/Artist';
 import ArtistAvatar from '@/components/artist/ArtistAvatar';
 import ArtistList from '@/components/artist/ArtistList';
 import ThemeToggle from '@/components/ThemeToggle';
 import TimeRangeSelector from '@/components/TimeRange';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useTopArtists } from '@/hooks/useTopArtists';
+import type { ArtistProps } from '@/types/artist';
 import { useState } from 'react';
 
 const TopArtists = () => {
@@ -39,7 +39,7 @@ const TopArtists = () => {
 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10">
           {artists.map((item: ArtistProps) => (
-            <ArtistAvatar key={item.id} artist={item} isLoading={isLoading} />
+            <ArtistAvatar key={item.id} artist={item} isLoading={isLoading} variant='grid'/>
           ))}
         </div>
       </div>

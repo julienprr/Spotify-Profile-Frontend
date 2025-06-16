@@ -1,5 +1,5 @@
 import { getUserTopArtists } from '@/api/play-manager.service';
-import type { ArtistProps } from '@/components/artist/Artist';
+import type { ArtistProps } from '@/types/artist';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface ArtistsState {

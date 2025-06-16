@@ -10,7 +10,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthProvider';
-import PlaylistDetails from './pages/playlistDetails/PlaylistDetails';
+import PlaylistDetails from './pages/playlist-details/PlaylistDetails';
+import ArtistDetails from './pages/ArtistDetails';
 
  const router = createBrowserRouter([
    {
@@ -24,6 +25,10 @@ import PlaylistDetails from './pages/playlistDetails/PlaylistDetails';
        {
          path: 'top-artists',
          element: <TopArtists />,
+       },
+       {
+         path: 'artist/:id',
+         element: <ArtistDetails />,
        },
        {
          path: 'top-tracks',

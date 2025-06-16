@@ -1,11 +1,4 @@
-export type ArtistProps = {
-  id: string;
-  name: string;
-  description: string;
-  imageUrl: string;
-  spotifyUrl: string;
-  followers: number;
-};
+import type { ArtistProps } from "@/types/artist";
 
 const Artist = ({ artist }: { artist: ArtistProps }) => {
   return (
