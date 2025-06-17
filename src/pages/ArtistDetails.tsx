@@ -30,7 +30,7 @@ const ArtistDetails = () => {
           <span className="stat-label">FOLLOWERS</span>
         </div>
         <div className="flex flex-col items-center sm:gap-2">
-          <span className="stat-value">{artist.genres.length > 0 ? artist.genres[0] : 'N/A'}</span>{' '}
+          <span className="stat-value uppercase">{artist.genres.length > 0 ? artist.genres[0] : 'N/A'}</span>{' '}
           <span className="stat-label">GENRE</span>
         </div>
         <div className="flex flex-col items-center sm:gap-2">

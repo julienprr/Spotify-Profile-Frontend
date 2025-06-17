@@ -36,7 +36,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-background p-4 text-center text-foreground">
+    <div className="flex-col overflow-x-hidden p-4 text-center">
       <ThemeToggle />
 
       <div>

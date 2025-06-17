@@ -12,7 +12,7 @@ const TopTracks = () => {
 
   if (breakpoint === 'mobile') {
     return (
-      <div className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
+      <div className="flex-col">
         <ThemeToggle />
         <div className="mt-10 text-center">
           <h2 className="text-2xl font-bold">Top Tracks</h2>
@@ -27,14 +27,14 @@ const TopTracks = () => {
     );
   } else {
     return (
-      <div className="flex min-h-screen flex-col overflow-x-hidden bg-background px-4 pt-20 text-foreground">
+      <div className="flex-col px-4 pt-20">
         <ThemeToggle />
-          <div className="mb-20 flex justify-between">
-            <h1 className="text-6xl font-semibold">Top Tracks</h1>
-            <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
-          </div>
+        <div className="mb-20 flex justify-between">
+          <h1 className="text-6xl font-semibold">Top Tracks</h1>
+          <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
+        </div>
 
-          <TrackList items={tracks} isLoading={isLoading} />
+        <TrackList items={tracks} isLoading={isLoading} />
       </div>
     );
   }

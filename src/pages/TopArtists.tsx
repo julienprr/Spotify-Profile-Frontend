@@ -15,7 +15,7 @@ const TopArtists = () => {
 
   if (breakpoint === 'mobile') {
     return (
-      <div className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
+      <div className="flex-col">
         <ThemeToggle />
         <div className="mt-10 text-center">
           <h2 className="text-2xl font-bold">Top Artists</h2>
@@ -30,7 +30,7 @@ const TopArtists = () => {
     );
   } else {
     return (
-      <div className="flex min-h-screen flex-col overflow-x-hidden bg-background px-4 pt-20 text-foreground">
+      <div className="flex-col px-4 pt-20">
         <ThemeToggle />
         <div className="mb-20 flex justify-between">
           <h1 className="text-6xl font-semibold">Top Artists</h1>
@@ -39,7 +39,7 @@ const TopArtists = () => {
 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10">
           {artists.map((item: ArtistProps) => (
-            <ArtistAvatar key={item.id} artist={item} isLoading={isLoading} variant='grid'/>
+            <ArtistAvatar key={item.id} artist={item} isLoading={isLoading} variant="grid" />
           ))}
         </div>
       </div>

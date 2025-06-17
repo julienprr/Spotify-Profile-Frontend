@@ -46,7 +46,7 @@ const Callback = () => {
   }, [hasHandled]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
+    <div className="flex-col items-center justify-center p-4">
       {isErrored ? <ErrorFeedback message={message} /> : <p className="">Connexion à Spotify en cours...</p>}
     </div>
   );

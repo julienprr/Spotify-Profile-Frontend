@@ -11,7 +11,7 @@ const Playlists = () => {
 
   if (breakpoint === 'mobile') {
     return (
-      <div className="flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
+      <div className="flex-col">
         <div className="mt-10 mb-5 text-center">
           <h2 className="text-2xl font-bold">My Playlists</h2>
         </div>
@@ -20,7 +20,7 @@ const Playlists = () => {
     );
   } else {
     return (
-      <div className="flex min-h-screen flex-col overflow-x-hidden bg-background px-4 pt-20 text-foreground">
+      <div className="flex-col px-4 pt-20">
         <ThemeToggle />
           <h1 className="text-6xl font-semibold mb-20">My Playlists</h1>
 
