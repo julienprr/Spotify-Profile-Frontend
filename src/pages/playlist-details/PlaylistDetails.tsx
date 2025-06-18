@@ -94,8 +94,8 @@ const PlaylistDetails = () => {
     handleClearPlaylist,
     handleShufflePlaylist,
     handleSortPlaylist,
-    handleAddFavoritePlaylist,
-    handleRemoveFavoritePlaylist,
+    handleToggleFavorite,
+
   } = usePlaylistActions();
 
   const onCopyPlaylist = (destinationId: string) => {
@@ -114,7 +114,6 @@ const PlaylistDetails = () => {
 
   usePlaylist(id!);
   const playlist = useSelector((state: RootState) => state.playlists.selected[id!]) as PlaylistDetails | undefined;
-  console.log('Playlist selected:', playlist);
 
   if (!playlist) {
     return <div className="bg-background p-4 text-foreground">Playlist introuvable.</div>;
@@ -122,14 +121,8 @@ const PlaylistDetails = () => {
 
   const tracks = Array.isArray(playlist.tracks) ? playlist.tracks : [];
   const isFavorite = playlist.isFavorite;
+  console.log("isFavorite: ", isFavorite);
 
-  const handleToggleFavorite = () => {
-    if (playlist.isFavorite) {
-      handleRemoveFavoritePlaylist(playlist.id);
-    } else {
-      handleAddFavoritePlaylist(playlist.id);
-    }
-  };
 
   if (breakpoint === 'mobile' && tracks.length > 0) {
     return (
@@ -140,7 +133,7 @@ const PlaylistDetails = () => {
           setIsClearDialogOpen={setIsClearDialogOpen}
           handleSortPlaylist={() => handleSortPlaylist(id)}
           handleshufflePlaylist={() => handleShufflePlaylist(id)}
-          handleToggleFavorite={handleToggleFavorite}
+          handleToggleFavorite={() => handleToggleFavorite(id)}
           isFavorite={isFavorite}
         />
         <ConfirmClearDialog
@@ -173,7 +166,7 @@ const PlaylistDetails = () => {
           setIsClearDialogOpen={setIsClearDialogOpen}
           handleSortPlaylist={() => handleSortPlaylist(id)}
           handleshufflePlaylist={() => handleShufflePlaylist(id)}
-          handleToggleFavorite={handleToggleFavorite}
+          handleToggleFavorite={() => handleToggleFavorite(id)}
           isFavorite={isFavorite}
         />
         <ConfirmClearDialog

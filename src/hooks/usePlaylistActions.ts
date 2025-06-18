@@ -1,10 +1,9 @@
 import {
-  addPlaylistToFavorite,
   clearUserPlaylist,
   copyUserPlaylist,
-  removePlaylistFromFavorite,
   shuffleUserPlaylist,
   sortPlaylistByReleaseDate,
+  toggleFavorite,
 } from '@/store/slices/playlistsSlice';
 import type { AppDispatch, RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,13 +36,9 @@ export const usePlaylistActions = () => {
     dispatch(sortPlaylistByReleaseDate({ playlistId }));
   };
 
-  const handleAddFavoritePlaylist = (playlistId: string) => {
-    dispatch(addPlaylistToFavorite({ playlistId }));
+  const handleToggleFavorite = (playlistId: string) => {
+    dispatch(toggleFavorite(playlistId));
   };
-
-   const handleRemoveFavoritePlaylist = (playlistId: string) => {
-     dispatch(removePlaylistFromFavorite({ playlistId }));
-   };
 
   return {
     playlists: items,
@@ -54,7 +49,6 @@ export const usePlaylistActions = () => {
     handleClearPlaylist,
     handleShufflePlaylist,
     handleSortPlaylist,
-    handleAddFavoritePlaylist,
-    handleRemoveFavoritePlaylist
+    handleToggleFavorite,
   };
 };

@@ -91,8 +91,6 @@ export const toggleFavorite = createAsyncThunk(
   'playlists/favorite/toggle',
   async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
     try {
-      dispatch(toggleFavoriteOptimistic({ playlistId }));
-
       const state = getState() as { playlists: PlaylistsState };
       const playlist = state.playlists.selected[playlistId];
 
@@ -100,14 +98,20 @@ export const toggleFavorite = createAsyncThunk(
         throw new Error('Playlist not found in state');
       }
 
-      if (playlist.isFavorite) {
-        await removeFavoritePlaylist({ playlistId });
+      const wasFavorite = playlist.isFavorite;
+
+      dispatch(toggleFavoriteOptimistic({ playlistId }));
+
+      let updatedPlaylist;
+      if (wasFavorite) {
+        const response = await removeFavoritePlaylist({ playlistId });
+        updatedPlaylist = response.playlist;
       } else {
-        await addFavoritePlaylist({ playlistId });
+        const response = await addFavoritePlaylist({ playlistId });
+        updatedPlaylist = response.playlist;
       }
 
-      const response = await getUserPlaylistById({ playlistId });
-      return response.playlist;
+      return updatedPlaylist;
     } catch (error: any) {
       dispatch(toggleFavoriteRollback({ playlistId }));
       return rejectWithValue(error.response?.data || error.message);
