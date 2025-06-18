@@ -15,7 +15,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { usePlaylistActions } from '@/hooks/usePlaylistActions';
 import type { RootState } from '@/store/store';
 import type { PlaylistDetails } from '@/types/playlist';
-import { Heart, ListMusic } from 'lucide-react';
+import { Heart, ListMusic, RefreshCw } from 'lucide-react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { usePlaylist } from '@/hooks/usePlaylist';
@@ -30,18 +30,26 @@ const Actions = ({
   handleSortPlaylist,
   handleshufflePlaylist,
   handleToggleFavorite,
+  handleToggleAutoSort,
   isFavorite,
+  autoSort,
 }: {
   setIsCopyDialogOpen: (open: boolean) => void;
   setIsClearDialogOpen: (open: boolean) => void;
   handleSortPlaylist: () => void;
   handleshufflePlaylist: () => void;
   handleToggleFavorite: () => void;
+  handleToggleAutoSort: () => void;
   isFavorite: boolean;
+  autoSort: boolean;
 }) => {
   return (
-    <div className="my-4 flex flex-row items-center gap-4">
-      <Button onClick={handleToggleFavorite} variant="action">
+    <div className="my-4 flex flex-row items-center gap-1">
+      <Button
+        onClick={handleToggleFavorite}
+        variant="action"
+        title={isFavorite ? 'Remove the playlist from favorite' : 'Add the playlist to favorite'}
+      >
         {isFavorite ? (
           <>
             <Heart className="h-4 w-4 fill-primary text-primary" />
@@ -51,6 +59,23 @@ const Actions = ({
           <>
             <Heart className="h-4 w-4 text-primary" />
             Add to favorite
+          </>
+        )}
+      </Button>
+      <Button
+        onClick={handleToggleAutoSort}
+        variant="action"
+        title={autoSort ? 'Do not automatically sort the playlist' : 'Automatically sort the playlist'}
+      >
+        {autoSort ? (
+          <>
+            <RefreshCw className="h-4 w-4 text-blue-400" />
+            Auto Sort
+          </>
+        ) : (
+          <>
+            <RefreshCw className="h-4 w-4 text-foreground" />
+            Auto Sort
           </>
         )}
       </Button>
@@ -95,7 +120,7 @@ const PlaylistDetails = () => {
     handleShufflePlaylist,
     handleSortPlaylist,
     handleToggleFavorite,
-
+    handleToggleAutoSort,
   } = usePlaylistActions();
 
   const onCopyPlaylist = (destinationId: string) => {
@@ -121,8 +146,10 @@ const PlaylistDetails = () => {
 
   const tracks = Array.isArray(playlist.tracks) ? playlist.tracks : [];
   const isFavorite = playlist.isFavorite;
-  console.log("isFavorite: ", isFavorite);
+  const autoSort = playlist.autoSort;
+  console.log('isFavorite: ', isFavorite);
 
+  console.log(playlist.tracks);
 
   if (breakpoint === 'mobile' && tracks.length > 0) {
     return (
@@ -134,7 +161,9 @@ const PlaylistDetails = () => {
           handleSortPlaylist={() => handleSortPlaylist(id)}
           handleshufflePlaylist={() => handleShufflePlaylist(id)}
           handleToggleFavorite={() => handleToggleFavorite(id)}
+          handleToggleAutoSort={() => handleToggleAutoSort(id)}
           isFavorite={isFavorite}
+          autoSort={autoSort}
         />
         <ConfirmClearDialog
           isOpen={isClearDialogOpen}
@@ -167,7 +196,9 @@ const PlaylistDetails = () => {
           handleSortPlaylist={() => handleSortPlaylist(id)}
           handleshufflePlaylist={() => handleShufflePlaylist(id)}
           handleToggleFavorite={() => handleToggleFavorite(id)}
+          handleToggleAutoSort={() => handleToggleAutoSort(id)}
           isFavorite={isFavorite}
+          autoSort={autoSort}
         />
         <ConfirmClearDialog
           isOpen={isClearDialogOpen}

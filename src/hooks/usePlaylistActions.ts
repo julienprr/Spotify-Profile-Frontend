@@ -3,6 +3,7 @@ import {
   copyUserPlaylist,
   shuffleUserPlaylist,
   sortPlaylistByReleaseDate,
+  toggleAutoSort,
   toggleFavorite,
 } from '@/store/slices/playlistsSlice';
 import type { AppDispatch, RootState } from '@/store/store';
@@ -40,6 +41,9 @@ export const usePlaylistActions = () => {
     dispatch(toggleFavorite(playlistId));
   };
 
+  const handleToggleAutoSort = (playlistId: string) => {
+    dispatch(toggleAutoSort(playlistId));
+  };
   return {
     playlists: items,
     status,
@@ -50,5 +54,6 @@ export const usePlaylistActions = () => {
     handleShufflePlaylist,
     handleSortPlaylist,
     handleToggleFavorite,
+    handleToggleAutoSort,
   };
 };

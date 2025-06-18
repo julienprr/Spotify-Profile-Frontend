@@ -1,9 +1,11 @@
 import {
+  addAutoSortPlaylist,
   addFavoritePlaylist,
   clearPlaylist,
   copyPlaylist as copyPlaylistApi,
   getUserPlaylistById,
   getUserPlaylists,
+  removeAutoSortPlaylist,
   removeFavoritePlaylist,
   shufflePlaylist,
   SortPlaylistByReleaseDate,
@@ -118,6 +120,38 @@ export const toggleFavorite = createAsyncThunk(
   }
 );
 
+export const toggleAutoSort = createAsyncThunk(
+  'playlists/auto-sort/toggle',
+  async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
+    try {
+      const state = getState() as { playlists: PlaylistsState };
+      const playlist = state.playlists.selected[playlistId];
+
+      if (!playlist) {
+        throw new Error('Playlist not found in state');
+      }
+
+      const wasAutoSorted = playlist.autoSort;
+
+      dispatch(toggleAutoSortOptimistic({ playlistId }));
+
+      let updatedPlaylist;
+      if (wasAutoSorted) {
+        const response = await removeAutoSortPlaylist({ playlistId });
+        updatedPlaylist = response.playlist;
+      } else {
+        const response = await addAutoSortPlaylist({ playlistId });
+        updatedPlaylist = response.playlist;
+      }
+
+      return updatedPlaylist;
+    } catch (error: any) {
+      dispatch(toggleAutoSortRollback({ playlistId }));
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 const playlistsSlice = createSlice({
   name: 'playlists',
   initialState,
@@ -144,6 +178,30 @@ const playlistsSlice = createSlice({
 
       if (state.selected[playlistId]) {
         state.selected[playlistId].isFavorite = !state.selected[playlistId].isFavorite;
+      }
+    },
+    toggleAutoSortOptimistic(state, action: PayloadAction<{ playlistId: string }>) {
+      const { playlistId } = action.payload;
+
+      const item = state.items.find((p) => p.id === playlistId);
+      if (item) {
+        item.autoSort = !item.autoSort;
+      }
+
+      if (state.selected[playlistId]) {
+        state.selected[playlistId].autoSort = !state.selected[playlistId].autoSort;
+      }
+    },
+    toggleAutoSortRollback(state, action: PayloadAction<{ playlistId: string }>) {
+      const { playlistId } = action.payload;
+
+      const item = state.items.find((p) => p.id === playlistId);
+      if (item) {
+        item.autoSort = !item.autoSort;
+      }
+
+      if (state.selected[playlistId]) {
+        state.selected[playlistId].autoSort = !state.selected[playlistId].autoSort;
       }
     },
     resetPlaylists(state) {
@@ -189,6 +247,19 @@ const playlistsSlice = createSlice({
           state.selected[updated.id].isFavorite = updated.isFavorite;
         }
       })
+      .addCase(toggleAutoSort.fulfilled, (state, action) => {
+        const updated = action.payload;
+        if (!updated) return;
+
+        const index = state.items.findIndex((p) => p.id === updated.id);
+        if (index !== -1) {
+          state.items[index].autoSort = updated.autoSort;
+        }
+
+        if (state.selected[updated.id]) {
+          state.selected[updated.id].autoSort = updated.autoSort;
+        }
+      })
       .addCase(sortPlaylistByReleaseDate.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
         const updated = action.payload;
         if (!updated) return;
@@ -219,6 +290,12 @@ const playlistsSlice = createSlice({
   },
 });
 
-export const { toggleFavoriteOptimistic, toggleFavoriteRollback, resetPlaylists } = playlistsSlice.actions;
+export const {
+  toggleFavoriteOptimistic,
+  toggleFavoriteRollback,
+  toggleAutoSortOptimistic,
+  toggleAutoSortRollback,
+  resetPlaylists,
+} = playlistsSlice.actions;
 
 export default playlistsSlice.reducer;
