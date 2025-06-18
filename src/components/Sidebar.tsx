@@ -38,7 +38,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile: Burger menu */}
-      <div className="fixed top-4 left-4 z-50 lg:hidden">
+      <div className="mt-4 ml-4 lg:hidden absolute">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="bigicon">

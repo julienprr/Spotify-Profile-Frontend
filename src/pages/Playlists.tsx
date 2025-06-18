@@ -29,10 +29,10 @@ const Playlists = () => {
 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10">
           {playlists.map((item: PlaylistProps) => (
-            <>
+            <div key={item.id}>
               <ContextMenu>
                 <ContextMenuTrigger>
-                  <PlaylistCover key={item.id} playlist={item} isLoading={isLoading} variant="grid" />
+                  <PlaylistCover playlist={item} isLoading={isLoading} variant="grid" />
                 </ContextMenuTrigger>
                 <ContextMenuContent className="w-48 rounded-lg border border-muted bg-background shadow-xl">
                   <ContextMenuItem onClick={() => handleToggleFavorite(item.id)}>
@@ -48,7 +48,7 @@ const Playlists = () => {
                   </ContextMenuItem>
                 </ContextMenuContent>
               </ContextMenu>
-            </>
+            </div>
           ))}
         </div>
       </div>

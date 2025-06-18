@@ -65,12 +65,7 @@ const Home = () => {
               <div className="mb-6">
                 <div className="mb-4 flex justify-between">
                   <h2 className="text-lg font-bold sm:text-3xl sm:tracking-wide">Top Artists</h2>
-                  <Button
-                    onClick={() => navigate('/top-artists')}
-                    variant="outlineRounded"
-                    className="tracking-wide uppercase"
-                    size={'lg'}
-                  >
+                  <Button onClick={() => navigate('/top-artists')} variant="outlineRounded" size={'lg'}>
                     See More
                   </Button>
                 </div>
@@ -80,12 +75,7 @@ const Home = () => {
               <div className="mt-10 sm:mt-0">
                 <div className="mb-4 flex justify-between">
                   <h2 className="text-lg font-bold sm:text-3xl sm:tracking-wide">Top Tracks</h2>
-                  <Button
-                    onClick={() => navigate('/top-tracks')}
-                    variant="outlineRounded"
-                    className="tracking-wide uppercase"
-                    size={'lg'}
-                  >
+                  <Button onClick={() => navigate('/top-tracks')} variant="outlineRounded" size={'lg'}>
                     See More
                   </Button>
                 </div>
@@ -94,7 +84,7 @@ const Home = () => {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-start space-y-8 pt-[20vh] text-center pb-[40vh]">
+          <div className="flex flex-col items-center justify-start space-y-8 pt-[20vh] pb-[40vh] text-center">
             <h1 className="text-3xl font-bold tracking-wide sm:text-4xl">Spotify Profile</h1>
             <Button onClick={handleLogin} variant="primary" className="uppercase" size={'xxl'}>
               log in to spotify

@@ -11,6 +11,11 @@ const ArtistList = ({ items, isLoading }: { items: ArtistProps[]; isLoading: boo
         <ArtistSkeleton />
         <ArtistSkeleton />
         <ArtistSkeleton />
+        <ArtistSkeleton />
+        <ArtistSkeleton />
+        <ArtistSkeleton />
+        <ArtistSkeleton />
+        <ArtistSkeleton />
       </div>
     );
   }

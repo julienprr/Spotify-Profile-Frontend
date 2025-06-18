@@ -13,7 +13,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ username, imageUrl, followers
 
   if (breakpoint === 'mobile') {
     return (
-      <div className="flex items-center space-x-4 pt-4">
+      <div className="flex items-center space-x-4 pt-10">
         <img src={imageUrl} alt={`${username}'s profile`} className="profile-image" />
 
         <div className="flex flex-col items-start">
