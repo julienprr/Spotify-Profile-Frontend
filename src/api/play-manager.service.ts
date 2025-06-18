@@ -25,7 +25,7 @@ export const getUserPlaylistById = async ({ playlistId }: { playlistId: string }
 export const SortPlaylistByReleaseDate = async ({ playlistId }: { playlistId: string }) => {
   try {
     console.log(`Reorganizing playlist with ID: ${playlistId}`);
-    const res = await apiClient.post('/playlists/reorganize/', { playlistId });
+    const res = await apiClient.post(`/playlists/sort/${playlistId}`);
     return res.data;
   } catch (error) {
     console.error('Error reorganizing playlist', error);
