@@ -4,7 +4,7 @@ import type React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import PlaylistCoverSkeleton from './PlaylistCoverSkeleton';
-import DefaultPlaylistCover from "@/assets/images/default_playlist_cover.jpg"
+import DefaultPlaylistCover from '@/assets/images/default_playlist_cover.jpg';
 
 type PlaylistCoverProps = {
   playlist: PlaylistProps;
@@ -30,7 +30,7 @@ const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, vari
     >
       <div
         className={cn(
-          'overflow-hidden rounded-md mb-5',
+          'mb-5 overflow-hidden rounded-md',
           variant === 'grid' ? 'h-[200px] w-[200px]' : 'w-[200px]h-[200px] sm:h-[300px] sm:w-[300px]'
         )}
       >
@@ -43,7 +43,7 @@ const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, vari
 
       {variant === 'default' ? (
         <>
-          <h2 className="text-lg text-foreground font-bold">{playlist.name}</h2>
+          <h2 className="text-lg font-bold text-foreground">{playlist.name}</h2>
           <p className="text-sm text-foreground">By {playlist.ownerName}</p>
           <p className="text-muted-foreground">{playlist.totalTracks} tracks</p>
         </>

@@ -1,19 +1,18 @@
-import { useAuth } from '@/contexts/AuthProvider';
-import ThemeToggle from '../components/ThemeToggle';
-import { API_URL } from '@/config';
 import UserProfile from '@/components/UserProfile';
-import { Button } from '@/components/ui/button';
-import { useTopTracks } from '@/hooks/useTopTracks';
-import TrackList from '@/components/track/TrackList';
-import { useTopArtists } from '@/hooks/useTopArtists';
 import ArtistList from '@/components/artist/ArtistList';
+import TrackList from '@/components/track/TrackList';
+import { Button } from '@/components/ui/button';
+import { API_URL } from '@/config';
+import { useAuth } from '@/contexts/AuthProvider';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import type { AppDispatch } from '@/store/store';
-import { resetPlaylists } from '@/store/slices/playlistsSlice';
+import { useTopArtists } from '@/hooks/useTopArtists';
+import { useTopTracks } from '@/hooks/useTopTracks';
 import { resetArtists } from '@/store/slices/artistsSlice';
+import { resetPlaylists } from '@/store/slices/playlistsSlice';
 import { resetTracks } from '@/store/slices/tracksSlice';
+import type { AppDispatch } from '@/store/store';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const { isAuthenticated, setIsAuthenticated, userProfile } = useAuth();
@@ -47,8 +46,6 @@ const Home = () => {
 
   return (
     <div className="flex flex-col p-4 text-center">
-      <ThemeToggle />
-
       <div>
         {isAuthenticated ? (
           <div>

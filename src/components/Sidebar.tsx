@@ -56,7 +56,7 @@ const Sidebar = () => {
             <NavLinks />
             <div className="flex w-full justify-center">
               <Link to="/" className="mt-30 block w-20">
-                <img src={githubLogo} alt="Spotify" className="w-full" />
+                <img src={githubLogo} alt="Github logo" className="w-full" />
               </Link>
             </div>
           </SheetContent>

@@ -7,6 +7,7 @@ export type PlaylistProps = {
   description: string;
   totalTracks: string;
   imageUrl: string;
+  spotifyUrl: string,
   public: boolean;
   isFavorite: boolean;
   autoSort: boolean;

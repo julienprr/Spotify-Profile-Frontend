@@ -1,4 +1,3 @@
-import ThemeToggle from '@/components/ThemeToggle';
 import TimeRangeSelector from '@/components/TimeRange';
 import TrackList from '@/components/track/TrackList';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
@@ -13,7 +12,6 @@ const TopTracks = () => {
   if (breakpoint === 'mobile') {
     return (
       <div className="flex-col">
-        <ThemeToggle />
         <div className="mt-10 text-center">
           <h2 className="text-2xl font-bold">Top Tracks</h2>
 
@@ -28,7 +26,6 @@ const TopTracks = () => {
   } else {
     return (
       <div className="flex-col px-4 pt-20">
-        <ThemeToggle />
         <div className="mb-20 flex justify-between">
           <h1 className="text-6xl font-semibold">Top Tracks</h1>
           <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />

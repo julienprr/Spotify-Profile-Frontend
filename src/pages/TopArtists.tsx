@@ -1,6 +1,5 @@
 import ArtistAvatar from '@/components/artist/ArtistAvatar';
 import ArtistList from '@/components/artist/ArtistList';
-import ThemeToggle from '@/components/ThemeToggle';
 import TimeRangeSelector from '@/components/TimeRange';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useTopArtists } from '@/hooks/useTopArtists';
@@ -16,7 +15,6 @@ const TopArtists = () => {
   if (breakpoint === 'mobile') {
     return (
       <div className="flex-col">
-        <ThemeToggle />
         <div className="mt-10 text-center">
           <h2 className="text-2xl font-bold">Top Artists</h2>
 
@@ -31,7 +29,6 @@ const TopArtists = () => {
   } else {
     return (
       <div className="flex-col px-4 pt-20">
-        <ThemeToggle />
         <div className="mb-20 flex justify-between">
           <h1 className="text-6xl font-semibold">Top Artists</h1>
           <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
