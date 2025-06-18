@@ -147,9 +147,6 @@ const PlaylistDetails = () => {
   const tracks = Array.isArray(playlist.tracks) ? playlist.tracks : [];
   const isFavorite = playlist.isFavorite;
   const autoSort = playlist.autoSort;
-  console.log('isFavorite: ', isFavorite);
-
-  console.log(playlist.tracks);
 
   if (breakpoint === 'mobile' && tracks.length > 0) {
     return (

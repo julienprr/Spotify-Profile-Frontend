@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 
 const ArtistDetails = () => {
   const { id } = useParams();
-  console.log(id);
 
   const artist =
     useSelector((state: RootState) => {
