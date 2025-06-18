@@ -27,10 +27,20 @@ export const fetchTopArtists = createAsyncThunk('artists/fetchTopArtists', async
   return response;
 });
 
-const tracksSlice = createSlice({
+const artistsSlice = createSlice({
   name: 'playlists',
   initialState,
-  reducers: {},
+  reducers: {
+    resetArtists(state) {
+      (state.items = {
+        short_term: [],
+        medium_term: [],
+        long_term: [],
+      }),
+        (state.status = 'idle');
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTopArtists.pending, (state) => {
@@ -47,4 +57,6 @@ const tracksSlice = createSlice({
   },
 });
 
-export default tracksSlice.reducer;
+export const { resetArtists } = artistsSlice.actions;
+
+export default artistsSlice.reducer;

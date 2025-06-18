@@ -86,28 +86,30 @@ export const clearUserPlaylist = createAsyncThunk(
   }
 );
 
-export const addPlaylistToFavorite = createAsyncThunk(
-  'playlists/favorite/add',
-  async ({ playlistId }: { playlistId: string }, { rejectWithValue }) => {
+
+export const toggleFavorite = createAsyncThunk(
+  'playlists/favorite/toggle',
+  async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
     try {
-      await addFavoritePlaylist({ playlistId });
+      dispatch(toggleFavoriteOptimistic({ playlistId }));
+
+      const state = getState() as { playlists: PlaylistsState };
+      const playlist = state.playlists.selected[playlistId];
+
+      if (!playlist) {
+        throw new Error('Playlist not found in state');
+      }
+
+      if (playlist.isFavorite) {
+        await removeFavoritePlaylist({ playlistId });
+      } else {
+        await addFavoritePlaylist({ playlistId });
+      }
+
       const response = await getUserPlaylistById({ playlistId });
       return response.playlist;
     } catch (error: any) {
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
-
-export const removePlaylistFromFavorite = createAsyncThunk(
-  'playlists/favorite/remove',
-  async ({ playlistId }: { playlistId: string }, { rejectWithValue }) => {
-    try {
-      const response = await removeFavoritePlaylist({ playlistId });
-      console.log(response);
-
-      return response.playlist;
-    } catch (error: any) {
+      dispatch(toggleFavoriteRollback({ playlistId }));
       return rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -116,7 +118,38 @@ export const removePlaylistFromFavorite = createAsyncThunk(
 const playlistsSlice = createSlice({
   name: 'playlists',
   initialState,
-  reducers: {},
+  reducers: {
+    toggleFavoriteOptimistic(state, action: PayloadAction<{ playlistId: string }>) {
+      const { playlistId } = action.payload;
+
+      const item = state.items.find((p) => p.id === playlistId);
+      if (item) {
+        item.isFavorite = !item.isFavorite;
+      }
+
+      if (state.selected[playlistId]) {
+        state.selected[playlistId].isFavorite = !state.selected[playlistId].isFavorite;
+      }
+    },
+    toggleFavoriteRollback(state, action: PayloadAction<{ playlistId: string }>) {
+      const { playlistId } = action.payload;
+
+      const item = state.items.find((p) => p.id === playlistId);
+      if (item) {
+        item.isFavorite = !item.isFavorite;
+      }
+
+      if (state.selected[playlistId]) {
+        state.selected[playlistId].isFavorite = !state.selected[playlistId].isFavorite;
+      }
+    },
+    resetPlaylists(state) {
+      state.items = [];
+      state.selected = {};
+      state.status = 'idle';
+      state.error = null;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPlaylists.pending, (state) => {
@@ -140,30 +173,17 @@ const playlistsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch playlist by ID';
       })
-      .addCase(addPlaylistToFavorite.fulfilled, (state, action) => {
+      .addCase(toggleFavorite.fulfilled, (state, action) => {
         const updated = action.payload;
         if (!updated) return;
 
         const index = state.items.findIndex((p) => p.id === updated.id);
         if (index !== -1) {
-          state.items[index].isFavorite = true;
+          state.items[index].isFavorite = updated.isFavorite;
         }
 
         if (state.selected[updated.id]) {
-          state.selected[updated.id].isFavorite = true;
-        }
-      })
-      .addCase(removePlaylistFromFavorite.fulfilled, (state, action) => {
-        const updated = action.payload;
-        if (!updated) return;
-
-        const index = state.items.findIndex((p) => p.id === updated.id);
-        if (index !== -1) {
-          state.items[index].isFavorite = false;
-        }
-
-        if (state.selected[updated.id]) {
-          state.selected[updated.id].isFavorite = false;
+          state.selected[updated.id].isFavorite = updated.isFavorite;
         }
       })
       .addCase(clearUserPlaylist.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
@@ -176,5 +196,7 @@ const playlistsSlice = createSlice({
       });
   },
 });
+
+export const { toggleFavoriteOptimistic, toggleFavoriteRollback, resetPlaylists } = playlistsSlice.actions;
 
 export default playlistsSlice.reducer;

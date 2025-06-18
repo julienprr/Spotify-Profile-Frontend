@@ -31,6 +31,15 @@ const tracksSlice = createSlice({
   name: 'tracks',
   initialState,
   reducers: {
+    resetTracks(state) {
+      (state.items = {
+        short_term: [],
+        medium_term: [],
+        long_term: [],
+      }),
+        (state.status = 'idle');
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,8 +53,10 @@ const tracksSlice = createSlice({
       .addCase(fetchTopTracks.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch top tracks';
-      })
+      });
   },
 });
+
+export const { resetTracks } = tracksSlice.actions;
 
 export default tracksSlice.reducer;

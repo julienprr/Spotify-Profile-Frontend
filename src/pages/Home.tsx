@@ -9,6 +9,11 @@ import { useTopArtists } from '@/hooks/useTopArtists';
 import ArtistList from '@/components/artist/ArtistList';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/store/store';
+import { resetPlaylists } from '@/store/slices/playlistsSlice';
+import { resetArtists } from '@/store/slices/artistsSlice';
+import { resetTracks } from '@/store/slices/tracksSlice';
 
 const Home = () => {
   const { isAuthenticated, setIsAuthenticated, userProfile } = useAuth();
@@ -22,6 +27,8 @@ const Home = () => {
   const displayedArtists = artists?.slice(0, maxArtistItems);
   const displayedTracks = tracks?.slice(0, maxTrackItems);
 
+  const dispatch = useDispatch<AppDispatch>();
+
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -32,11 +39,14 @@ const Home = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userProfile');
     localStorage.removeItem('tokenTimestamp');
+    dispatch(resetPlaylists());
+    dispatch(resetTracks());
+    dispatch(resetArtists());
     setIsAuthenticated(false);
   };
 
   return (
-    <div className="flex-col overflow-x-hidden p-4 text-center">
+    <div className="flex flex-col p-4 text-center">
       <ThemeToggle />
 
       <div>
@@ -87,7 +97,7 @@ const Home = () => {
             </div>
           </div>
         ) : (
-          <div className="space-y-8 text-center">
+          <div className="flex flex-col items-center justify-start space-y-8 pt-[20vh] text-center pb-[40vh]">
             <h1 className="text-3xl font-bold tracking-wide sm:text-4xl">Spotify Profile</h1>
             <Button onClick={handleLogin} variant="primary" className="uppercase" size={'xxl'}>
               log in to spotify
