@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "vite ",
+    "build": "vite build",
+    "build:local": "vite build --mode local",
+    "build:dev": "vite build --mode dev",
+    "build:prod": "vite build --mode production",
     "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" ",
     "preview": "vite preview"
   },
   "dependencies": {
