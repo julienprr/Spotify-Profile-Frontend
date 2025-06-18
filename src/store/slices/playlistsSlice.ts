@@ -86,7 +86,6 @@ export const clearUserPlaylist = createAsyncThunk(
   }
 );
 
-
 export const toggleFavorite = createAsyncThunk(
   'playlists/favorite/toggle',
   async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
@@ -152,7 +151,7 @@ const playlistsSlice = createSlice({
       state.selected = {};
       state.status = 'idle';
       state.error = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -188,6 +187,25 @@ const playlistsSlice = createSlice({
 
         if (state.selected[updated.id]) {
           state.selected[updated.id].isFavorite = updated.isFavorite;
+        }
+      })
+      .addCase(sortPlaylistByReleaseDate.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
+        const updated = action.payload;
+        if (!updated) return;
+
+        if (state.selected[updated.id]) {
+          state.selected[updated.id] = updated;
+        }
+      })
+      .addCase(shuffleUserPlaylist.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
+        const updated = action.payload;
+        if (!updated) return;
+
+        state.selected[updated.id] = updated;
+
+        const index = state.items.findIndex((p) => p.id === updated.id);
+        if (index !== -1) {
+          state.items[index] = { ...state.items[index], ...updated };
         }
       })
       .addCase(clearUserPlaylist.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {

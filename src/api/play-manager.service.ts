@@ -36,7 +36,7 @@ export const SortPlaylistByReleaseDate = async ({ playlistId }: { playlistId: st
 export const shufflePlaylist = async ({ playlistId }: { playlistId: string }) => {
   try {
     console.log(`Shuffling playlist with ID: ${playlistId}`);
-    const res = await apiClient.delete(`/playlists/shuffle/${playlistId}`);
+    const res = await apiClient.post(`/playlists/shuffle/${playlistId}`);
     return res.data;
   } catch (error) {
     console.error('Error shuffling playlist', error);
