@@ -3,7 +3,6 @@ import Artist from './Artist';
 import type { ArtistProps } from '@/types/artist';
 
 const ArtistList = ({ items, isLoading }: { items: ArtistProps[]; isLoading: boolean }) => {
-
   if (isLoading) {
     return (
       <div className="flex flex-col space-y-6 sm:space-y-10">

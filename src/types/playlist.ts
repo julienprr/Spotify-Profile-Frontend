@@ -1,4 +1,4 @@
-import type { TrackProps } from "@/components/track/Track";
+import type { TrackProps } from '@/components/track/Track';
 
 export type PlaylistProps = {
   id: string;
@@ -7,7 +7,7 @@ export type PlaylistProps = {
   description: string;
   totalTracks: string;
   imageUrl: string;
-  spotifyUrl: string,
+  spotifyUrl: string;
   public: boolean;
   isFavorite: boolean;
   autoSort: boolean;

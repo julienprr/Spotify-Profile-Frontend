@@ -13,50 +13,50 @@ import { AuthProvider } from './contexts/AuthProvider';
 import PlaylistDetails from './pages/playlist-details/PlaylistDetails';
 import ArtistDetails from './pages/ArtistDetails';
 
- const router = createBrowserRouter([
-   {
-     path: '/',
-     element: <App />,
-     children: [
-       {
-         index: true,
-         element: <Home />,
-       },
-       {
-         path: 'top-artists',
-         element: <TopArtists />,
-       },
-       {
-         path: 'artist/:id',
-         element: <ArtistDetails />,
-       },
-       {
-         path: 'top-tracks',
-         element: <TopTracks />,
-       },
-       {
-         path: 'callback',
-         element: <Callback />,
-       },
-       {
-         path: 'playlists',
-         element: <Playlists />,
-       },
-       {
-         path: 'playlist/:id',
-         element: <PlaylistDetails />,
-       },
-       {
-         path: 'not-found',
-         element: <NotFound />,
-       },
-       {
-         path: '*',
-         element: <Navigate to="/not-found" replace />,
-       },
-     ],
-   },
- ]);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: 'top-artists',
+        element: <TopArtists />,
+      },
+      {
+        path: 'artist/:id',
+        element: <ArtistDetails />,
+      },
+      {
+        path: 'top-tracks',
+        element: <TopTracks />,
+      },
+      {
+        path: 'callback',
+        element: <Callback />,
+      },
+      {
+        path: 'playlists',
+        element: <Playlists />,
+      },
+      {
+        path: 'playlist/:id',
+        element: <PlaylistDetails />,
+      },
+      {
+        path: 'not-found',
+        element: <NotFound />,
+      },
+      {
+        path: '*',
+        element: <Navigate to="/not-found" replace />,
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
