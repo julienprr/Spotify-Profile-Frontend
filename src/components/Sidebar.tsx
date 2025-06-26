@@ -49,7 +49,7 @@ const Sidebar = () => {
           <SheetDescription className="sr-only">navigation menu for the app</SheetDescription>
           <SheetContent
             side="left"
-            className="flex h-full w-full flex-col items-center justify-center border-0 pt-20 text-center text-primary"
+            className="flex h-full w-full flex-col items-center justify-center border-0 pt-20 text-center text-foreground"
           >
             <NavLinks />
             <div className="flex w-full justify-center">
