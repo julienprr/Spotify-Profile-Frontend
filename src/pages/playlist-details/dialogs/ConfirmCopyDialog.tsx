@@ -18,13 +18,7 @@ interface ConfirmCopyDialogProps {
   playlists: PlaylistProps[];
 }
 
-const ConfirmCopyDialog = ({
-  isOpen,
-  setIsOpen,
-  handleCopyPlaylist,
-  playlist,
-  playlists,
-}: ConfirmCopyDialogProps) => {
+const ConfirmCopyDialog = ({ isOpen, setIsOpen, handleCopyPlaylist, playlist, playlists }: ConfirmCopyDialogProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="rounded-lg border border-muted bg-background text-foreground shadow-xl sm:max-w-[425px]">

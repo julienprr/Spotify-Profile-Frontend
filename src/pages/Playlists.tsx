@@ -19,7 +19,12 @@ const Playlists = () => {
         <div className="mt-10 mb-5 text-center">
           <h2 className="text-2xl font-bold">My Playlists</h2>
         </div>
-        <PlaylistList items={playlists} isLoading={isLoading} handleToggleFavorite={handleToggleFavorite} handleToggleAutoSort={handleToggleAutoSort} />
+        <PlaylistList
+          items={playlists}
+          isLoading={isLoading}
+          handleToggleFavorite={handleToggleFavorite}
+          handleToggleAutoSort={handleToggleAutoSort}
+        />
       </div>
     );
   } else {

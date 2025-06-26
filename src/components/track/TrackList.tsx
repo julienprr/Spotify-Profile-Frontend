@@ -6,7 +6,7 @@ import defaultTrackCover from '@/assets/images/default_track_cover_small.jpg';
 const TrackList = ({ items, isLoading }: { items: any; isLoading: boolean }) => {
   if (isLoading) {
     return (
-          <div className="flex flex-col space-y-6">
+      <div className="flex flex-col space-y-6">
         <TrackSkeleton />
         <TrackSkeleton />
         <TrackSkeleton />

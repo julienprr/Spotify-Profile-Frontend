@@ -21,7 +21,7 @@ const ArtistDetails = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background text-center text-foreground pb-25">
+    <div className="flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background pb-25 text-center text-foreground">
       <ArtistAvatar artist={artist} isLoading={false} />
       <div className="mt-8 flex gap-8">
         <div className="flex flex-col items-center sm:gap-2">

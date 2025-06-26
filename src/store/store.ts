@@ -3,12 +3,11 @@ import playlistsReducer from './slices/playlistsSlice';
 import tracksReducer from './slices/tracksSlice';
 import artistsReducer from './slices/artistsSlice';
 
-
 export const store = configureStore({
   reducer: {
     playlists: playlistsReducer,
     tracks: tracksReducer,
-    artists: artistsReducer
+    artists: artistsReducer,
   },
 });
 
