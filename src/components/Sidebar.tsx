@@ -38,26 +38,30 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile: Burger menu */}
-      <div className="mt-4 ml-4 lg:hidden absolute">
+      <div className="absolute mt-4 ml-4 lg:hidden">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="bigicon">
               <Menu />
             </Button>
           </SheetTrigger>
-          <SheetTitle className="sr-only">
-            menu
-          </SheetTitle>
-          <SheetDescription className='sr-only'>navigation menu for the app</SheetDescription>
+          <SheetTitle className="sr-only">menu</SheetTitle>
+          <SheetDescription className="sr-only">navigation menu for the app</SheetDescription>
           <SheetContent
             side="left"
             className="flex h-full w-full flex-col items-center justify-center border-0 pt-20 text-center text-primary"
           >
             <NavLinks />
             <div className="flex w-full justify-center">
-              <Link to="/" className="mt-30 block w-20">
-                <img src={githubLogo} alt="Github logo" className="w-full" />
-              </Link>
+              <a
+                href="https://github.com/julienprr/spotify-profile-frontend"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Go to repository"
+                className="block w-20"
+              >
+                <img src={githubLogo} alt="GitHub" className="w-full" />
+              </a>
             </div>
           </SheetContent>
         </Sheet>
