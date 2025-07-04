@@ -1,5 +1,6 @@
 {
   "name": "spotify-profile-frontend",
+  "description": "Spotify Profile Frontend, an app to visualize and manage your spotify playlists",
   "private": true,
   "version": "0.0.0",
   "type": "module",
