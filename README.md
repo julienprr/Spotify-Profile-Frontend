@@ -1,54 +1,111 @@
-# React + TypeScript + Vite
+# 🎵 Spotify Profile
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+➡️ 🇫🇷 [French version](README.fr.md)
 
-Currently, two official plugins are available:
+Spotify Profile is a web application that allows you to manage and organize your Spotify playlists in an advanced way. It provides a modern and intuitive interface to view your playlists, favorite tracks, and artists, while giving you the ability to customize your listening experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌐 **Live application link:**
+[https://play-manager.julienprr.com](https://play-manager.julienprr.com)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Quick Start
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+- Node.js >= 20.x
+- npm >= 8.x
+- Docker (optional for containerization)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/julienprr/spotify-profile-frontend.git
+   cd spotify-profile-frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the application in development mode:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build for production
+```bash
+npm run build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Using Docker
+```bash
+docker build -t spotify-profile-frontend .
+docker run -p 80:80 spotify-profile-frontend
 ```
+
+---
+
+## 📖 User Guide
+
+### 🔑 Login
+- On your first visit, click **“Login with Spotify”**.
+- You will be redirected to Spotify to authorize the app to access your playlists and tracks.
+- Once authenticated, you’ll automatically be redirected to the Spotify Profile home page.
+
+### 🎵 Navigation
+- **Profile**: Displays your most-listened tracks and artists.
+- **Top Tracks**: Shows your favorite songs over 3, 6, or 12 months.
+- **Top Artists**: View your favorite artists and access their details.
+- **Playlists**: Lists all your playlists and allows you to access their details.
+- **Playlist Details**: Lets you sort, copy, or clear a playlist, and enable/disable auto-sorting.
+
+### ❤️ Favorites
+- Add or remove playlists from your favorites using the heart button.
+- Favorite playlists appear at the top of the list.
+
+### 🔄 Auto-Sorting
+- Enable auto-sorting to keep your playlist updated daily.
+- Disable it anytime from the details page or via the context menu.
+
+### 🚪 Logout
+- Click **“Logout”** in the menu to switch accounts or disconnect.
+
+---
+
+## ✨ Main Features
+
+- ✅ Secure login with Spotify (OAuth2)
+- ✅ View playlists, favorite tracks, and favorite artists
+- ✅ Automatically sort playlists by release date or shuffle
+- ✅ Add or remove playlists from favorites
+- ✅ Copy and clear playlists
+
+---
+
+## ⚙️ Technical Features
+
+- Frontend **React + Vite** with **TypeScript**
+- Modern UI with **TailwindCSS** and **Radix UI**
+- State management using **Redux Toolkit**
+- Communication with a backend API secured with JWT
+- Containerization with **Docker** and deployment on VPS
+- Responsive design (mobile and desktop)
+
+---
+
+## 📖 Documentation
+
+For more details on the backend API and overall project structure, see [play-manager-backend](https://github.com/julienprr/play-manager-backend).
+
+---
+
+## 👨‍💻 Author
+
+Developed by [julienprr](https://github.com/julienprr)
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
