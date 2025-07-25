@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode local-dev",
     "build": "vite build",
     "build:local": "vite build --mode local",
     "build:dev": "vite build --mode development",
