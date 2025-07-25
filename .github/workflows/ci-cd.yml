@@ -25,6 +25,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: julienprr/spotify-profile-frontend:${{ github.sha }}
+          build-args: |
+            BUILD_MODE=${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
 
   deploy:
     needs: build-and-push
