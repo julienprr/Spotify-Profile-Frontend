@@ -53,12 +53,12 @@ const Actions = ({
         {isFavorite ? (
           <>
             <Heart className="h-4 w-4 fill-primary text-primary" />
-            Remove from favorite
+            Remove
           </>
         ) : (
           <>
             <Heart className="h-4 w-4 text-primary" />
-            Add to favorite
+            Add
           </>
         )}
       </Button>
@@ -86,17 +86,16 @@ const Actions = ({
             Manage
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 rounded-lg border border-muted bg-background shadow-xl">
+        <DropdownMenuContent className="rounded-lg border border-muted bg-background px-2">
           <DropdownMenuGroup>
             <DropdownMenuSub>
               <DropdownMenuItem onClick={() => setIsCopyDialogOpen(true)}>Copy</DropdownMenuItem>
               <DropdownMenuItem onClick={() => setIsClearDialogOpen(true)}>Clear</DropdownMenuItem>
             </DropdownMenuSub>
-
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>Reorder</DropdownMenuSubTrigger>
               <DropdownMenuPortal>
-                <DropdownMenuSubContent className="w-56 rounded-lg border border-muted bg-background shadow-xl">
+                <DropdownMenuSubContent className="rounded-lg border border-muted bg-background px-2">
                   <DropdownMenuItem onClick={handleSortPlaylist}>Sort by release date</DropdownMenuItem>
                   <DropdownMenuItem onClick={handleshufflePlaylist}>Shuffle playlist</DropdownMenuItem>
                 </DropdownMenuSubContent>
@@ -150,7 +149,7 @@ const PlaylistDetails = () => {
 
   if (breakpoint === 'mobile' && tracks.length > 0) {
     return (
-      <div className="flex flex-col items-center p-4 text-foreground">
+      <div className="flex flex-col items-center pt-16 text-foreground">
         <PlaylistCover playlist={playlist} isLoading={false} />
         <Actions
           setIsCopyDialogOpen={setIsCopyDialogOpen}
