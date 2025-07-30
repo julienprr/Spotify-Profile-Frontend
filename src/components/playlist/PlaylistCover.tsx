@@ -7,7 +7,7 @@ import PlaylistCoverSkeleton from './PlaylistCoverSkeleton';
 import DefaultPlaylistCover from '@/assets/images/default_playlist_cover.jpg';
 
 type PlaylistCoverProps = {
-  playlist: PlaylistProps;
+  playlist?: PlaylistProps;
   isLoading: boolean;
   variant?: 'default' | 'grid';
 };
@@ -15,7 +15,7 @@ type PlaylistCoverProps = {
 const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, variant = 'default' }) => {
   const navigate = useNavigate();
 
-  if (isLoading) {
+  if (isLoading|| playlist == undefined) {
     return <PlaylistCoverSkeleton />;
   }
 
