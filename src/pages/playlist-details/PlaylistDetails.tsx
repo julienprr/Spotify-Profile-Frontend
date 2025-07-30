@@ -3,7 +3,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { usePlaylist } from '@/hooks/usePlaylist';
 import { usePlaylistActions } from '@/hooks/usePlaylistActions';
 import type { RootState } from '@/store/store';
-import type { PlaylistDetails } from '@/types/playlist';
+import type { PlaylistDetails as PlaylistDetailsType } from '@/types/playlist';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -41,7 +41,7 @@ const PlaylistDetails = () => {
   }
 
   usePlaylist(selectedId!);
-  const playlist = useSelector((state: RootState) => state.playlists.selected[selectedId!]) as PlaylistDetails | undefined;
+  const playlist = useSelector((state: RootState) => state.playlists.selected[selectedId!]) as PlaylistDetailsType | undefined;
   const status = useSelector((state: RootState) => state.playlists.selectedStatus[selectedId]);
   const error = useSelector((state: RootState) => state.playlists.selectedError[selectedId]);
 
