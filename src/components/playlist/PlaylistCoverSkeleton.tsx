@@ -6,6 +6,7 @@ const PlaylistCoverSkeleton = () => {
       <Skeleton className="h-[200px] w-[200px]" />
       <Skeleton className="h-[20px] w-[100px] rounded-lg" />
       <Skeleton className="h-[20px] w-[120px] rounded-lg" />
+      <Skeleton className="h-[20px] w-[100px] rounded-lg" />
     </div>
   );
 };

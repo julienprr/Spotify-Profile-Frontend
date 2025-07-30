@@ -16,6 +16,8 @@ import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/tool
 interface PlaylistsState {
   items: PlaylistSummary[];
   selected: Record<string, PlaylistDetails>;
+  selectedStatus: Record<string, 'idle' | 'loading' | 'succeeded' | 'failed'>;
+  selectedError: Record<string, string | null>;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -23,6 +25,8 @@ interface PlaylistsState {
 const initialState: PlaylistsState = {
   items: [],
   selected: {},
+  selectedStatus: {},
+  selectedError: {},
   status: 'idle',
   error: null,
 };
@@ -224,15 +228,22 @@ const playlistsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch playlists';
       })
-      .addCase(fetchPlaylistById.pending, (state) => {
+      .addCase(fetchPlaylistById.pending, (state, action) => {
+        const id = action.meta.arg;
         state.status = 'loading';
+        state.selectedStatus[id] = 'loading';
+        state.selectedError[id] = null;
       })
       .addCase(fetchPlaylistById.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
-        state.selected[action.payload.id] = action.payload;
+        const playlist = action.payload;
+        state.selected[playlist.id] = playlist;
+        state.selectedStatus[playlist.id] = 'succeeded';
       })
       .addCase(fetchPlaylistById.rejected, (state, action) => {
+        const id = action.meta.arg;
         state.status = 'failed';
-        state.error = action.error.message || 'Failed to fetch playlist by ID';
+        state.selectedStatus[id] = 'failed';
+        state.selectedError[id] = action.error.message || 'Failed to fetch playlist by ID';
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
         const updated = action.payload;

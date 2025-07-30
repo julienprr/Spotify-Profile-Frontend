@@ -1,6 +1,7 @@
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import TrackSkeleton from './TrackSkeleton';
 
-export type TrackProps = {
+export type TTrack = {
   id: string;
   name?: string;
   artistName: string;
@@ -8,6 +9,11 @@ export type TrackProps = {
   isExplicit: boolean;
   imageUrl?: string;
   duration: number;
+};
+
+export type TrackProps = {
+  track: TTrack;
+  isLoading: boolean;
 };
 
 const formatDuration = (ms: number) => {
@@ -25,8 +31,12 @@ const ExplicitIcon = () => {
   );
 };
 
-const Track = ({ track }: { track: TrackProps }) => {
+const Track = ({ track, isLoading }: TrackProps) => {
   const breakpoint = useBreakpoint();
+
+  if (isLoading) {
+    return <TrackSkeleton/>;
+  }
 
   return (
     <div className="flex flex-row justify-between overflow-hidden">
