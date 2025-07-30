@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Footer from './components/Footer';
+import { Toaster } from './components/ui/sonner';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <main className="flex-1 px-4 pt-4 pb-10 lg:ml-64">
         <Provider store={store}>
           <Outlet />
+          <Toaster/>
         </Provider>
         <Footer />
       </main>
