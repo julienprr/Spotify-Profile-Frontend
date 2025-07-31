@@ -97,7 +97,9 @@ export const toggleFavorite = createAsyncThunk(
   async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
     try {
       const state = getState() as { playlists: PlaylistsState };
-      const playlist = state.playlists.selected[playlistId];
+      const playlist =
+        state.playlists.selected[playlistId] ||
+        state.playlists.items.find((p) => p.id === playlistId);
 
       if (!playlist) {
         throw new Error('Playlist not found in state');
@@ -107,16 +109,16 @@ export const toggleFavorite = createAsyncThunk(
 
       dispatch(toggleFavoriteOptimistic({ playlistId }));
 
-      let updatedPlaylist;
+      let updatedFavoritePlaylists;
       if (wasFavorite) {
         const response = await removeFavoritePlaylist({ playlistId });
-        updatedPlaylist = response.playlist;
+        updatedFavoritePlaylists = response.favoritePlaylists;
       } else {
         const response = await addFavoritePlaylist({ playlistId });
-        updatedPlaylist = response.playlist;
+        updatedFavoritePlaylists = response.favoritePlaylists;
       }
 
-      return updatedPlaylist;
+      return updatedFavoritePlaylists;
     } catch (error: any) {
       dispatch(toggleFavoriteRollback({ playlistId }));
       return rejectWithValue(error.response?.data || error.message);
@@ -127,28 +129,31 @@ export const toggleFavorite = createAsyncThunk(
 export const toggleAutoSort = createAsyncThunk(
   'playlists/auto-sort/toggle',
   async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
+    console.log('toggleAutoSort ', playlistId);
+
     try {
       const state = getState() as { playlists: PlaylistsState };
-      const playlist = state.playlists.selected[playlistId];
+      const playlist = state.playlists.selected[playlistId] || state.playlists.items.find((p) => p.id === playlistId); // ✅ Ajout ici
+
+      console.log('playlist', playlist);
 
       if (!playlist) {
         throw new Error('Playlist not found in state');
       }
 
-      const wasAutoSorted = playlist.autoSort;
-
+      const wasAutoSort = playlist.autoSort;
       dispatch(toggleAutoSortOptimistic({ playlistId }));
 
-      let updatedPlaylist;
-      if (wasAutoSorted) {
+      let updatedAutoSortPlaylists;
+      if (wasAutoSort) {
         const response = await removeAutoSortPlaylist({ playlistId });
-        updatedPlaylist = response.playlist;
+        updatedAutoSortPlaylists = response.autoSortPlaylists;
       } else {
         const response = await addAutoSortPlaylist({ playlistId });
-        updatedPlaylist = response.playlist;
+        updatedAutoSortPlaylists = response.autoSortPlaylists;
       }
 
-      return updatedPlaylist;
+      return updatedAutoSortPlaylists;
     } catch (error: any) {
       dispatch(toggleAutoSortRollback({ playlistId }));
       return rejectWithValue(error.response?.data || error.message);
@@ -246,30 +251,24 @@ const playlistsSlice = createSlice({
         state.selectedError[id] = action.error.message || 'Failed to fetch playlist by ID';
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
-        const updated = action.payload;
-        if (!updated) return;
+        const updatedIds: string[] = action.payload;
+        state.items.forEach((playlist) => {
+          playlist.isFavorite = updatedIds.includes(playlist.id);
+        });
 
-        const index = state.items.findIndex((p) => p.id === updated.id);
-        if (index !== -1) {
-          state.items[index].isFavorite = updated.isFavorite;
-        }
-
-        if (state.selected[updated.id]) {
-          state.selected[updated.id].isFavorite = updated.isFavorite;
-        }
+        Object.values(state.selected).forEach((playlist) => {
+          playlist.isFavorite = updatedIds.includes(playlist.id);
+        });
       })
       .addCase(toggleAutoSort.fulfilled, (state, action) => {
-        const updated = action.payload;
-        if (!updated) return;
+        const updatedIds: string[] = action.payload;
+        state.items.forEach((playlist) => {
+          playlist.autoSort = updatedIds.includes(playlist.id);
+        });
 
-        const index = state.items.findIndex((p) => p.id === updated.id);
-        if (index !== -1) {
-          state.items[index].autoSort = updated.autoSort;
-        }
-
-        if (state.selected[updated.id]) {
-          state.selected[updated.id].autoSort = updated.autoSort;
-        }
+        Object.values(state.selected).forEach((playlist) => {
+          playlist.autoSort = updatedIds.includes(playlist.id);
+        });
       })
       .addCase(sortPlaylistByReleaseDate.fulfilled, (state, action: PayloadAction<PlaylistDetails>) => {
         const updated = action.payload;

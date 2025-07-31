@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import PlaylistCoverSkeleton from './PlaylistCoverSkeleton';
 import DefaultPlaylistCover from '@/assets/images/default_playlist_cover.jpg';
+import { Dot } from 'lucide-react';
 
 type PlaylistCoverProps = {
   playlist?: PlaylistProps;
@@ -15,7 +16,7 @@ type PlaylistCoverProps = {
 const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, variant = 'default' }) => {
   const navigate = useNavigate();
 
-  if (isLoading|| playlist == undefined) {
+  if (isLoading || playlist == undefined) {
     return <PlaylistCoverSkeleton />;
   }
 
@@ -48,9 +49,19 @@ const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, vari
           <p className="text-muted-foreground">{playlist.totalTracks} tracks</p>
         </>
       ) : (
-        <div>
-          <Button variant="link">{playlist.name}</Button>
-          <p className="text-muted-foreground">{playlist.totalTracks} tracks</p>
+        <div className="flex flex-col items-center text-center">
+          <div className="relative flex w-full items-center justify-center">
+            <Button variant="link" className="text-base font-medium">
+              {playlist.name}
+            </Button>
+
+            {/* <div className="absolute top-1/2 -right-14 flex -translate-y-1/2 space-x-1">
+              {playlist.isFavorite && <Dot className="h-10 w-10 fill-primary text-primary" />}
+              {playlist.autoSort && <Dot className="h-10 w-10 fill-blue-400 text-blue-400" />}
+            </div> */}
+          </div>
+
+          <p className="text-sm text-muted-foreground">{playlist.totalTracks} tracks</p>
         </div>
       )}
     </div>
