@@ -97,9 +97,7 @@ export const toggleFavorite = createAsyncThunk(
   async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
     try {
       const state = getState() as { playlists: PlaylistsState };
-      const playlist =
-        state.playlists.selected[playlistId] ||
-        state.playlists.items.find((p) => p.id === playlistId);
+      const playlist = state.playlists.selected[playlistId] || state.playlists.items.find((p) => p.id === playlistId);
 
       if (!playlist) {
         throw new Error('Playlist not found in state');
@@ -235,7 +233,6 @@ const playlistsSlice = createSlice({
       })
       .addCase(fetchPlaylistById.pending, (state, action) => {
         const id = action.meta.arg;
-        state.status = 'loading';
         state.selectedStatus[id] = 'loading';
         state.selectedError[id] = null;
       })
@@ -246,7 +243,6 @@ const playlistsSlice = createSlice({
       })
       .addCase(fetchPlaylistById.rejected, (state, action) => {
         const id = action.meta.arg;
-        state.status = 'failed';
         state.selectedStatus[id] = 'failed';
         state.selectedError[id] = action.error.message || 'Failed to fetch playlist by ID';
       })
