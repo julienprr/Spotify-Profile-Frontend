@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const { isAuthenticated, setIsAuthenticated, userProfile } = useAuth();
+  const { isAuthenticated, userProfile, logout } = useAuth();
   const { artists, isLoading: isLoadingArtists } = useTopArtists('short_term');
   const { tracks, isLoading: isLoadingTracks } = useTopTracks('short_term');
 
@@ -41,7 +41,7 @@ const Home = () => {
     dispatch(resetPlaylists());
     dispatch(resetTracks());
     dispatch(resetArtists());
-    setIsAuthenticated(false);
+    logout();
   };
 
   return (

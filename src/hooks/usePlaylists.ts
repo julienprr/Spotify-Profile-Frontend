@@ -8,16 +8,19 @@ export const usePlaylists = () => {
   const { items, status, error } = useSelector((state: RootState) => state.playlists);
 
   useEffect(() => {
-    if (status === 'idle' || items.length === 0) {
+    console.log('playlists', items.length, 'status', status);
+
+    if (status === 'idle') {
       dispatch(fetchPlaylists());
     }
-  }, [status, items.length, dispatch]);
+  }, [status, dispatch]);
 
   const isLoading = status === 'loading';
+  const isError = status === 'failed';
 
   const sortedPlaylists = [...items].sort((a, b) => {
     return (b.isFavorite ? 1 : 0) - (a.isFavorite ? 1 : 0);
   });
 
-  return { playlists: sortedPlaylists, status, error, isLoading };
+  return { playlists: sortedPlaylists, isLoading, isError, error };
 };

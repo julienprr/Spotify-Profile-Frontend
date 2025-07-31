@@ -15,7 +15,7 @@ const PlaylistList = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="flex flex-col space-y-6">
+      <div className="flex flex-col space-y-3">
         <PlaylistSkeleton />
         <PlaylistSkeleton />
         <PlaylistSkeleton />
@@ -36,7 +36,7 @@ const PlaylistList = ({
   if (!isLoading && items.length > 0) {
     return (
       <>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-3">
           {items.map((item: PlaylistSummary) => {
             const playlist: PlaylistSummary = {
               id: item.id,

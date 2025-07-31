@@ -98,7 +98,8 @@ export const getUserTopArtists = async () => {
 export const addFavoritePlaylist = async ({ playlistId }: { playlistId: string }) => {
   try {
     console.log(`Adding playlist ${playlistId} to favorites`);
-    const res = await apiClient.post('/playlists/favorites/', { playlistId });
+    const res = await apiClient.post(`/playlists/favorites/${playlistId}`);
+    console.log('res', res.data);
     return res.data;
   } catch (error) {
     console.error('Error adding favorite playlist', error);
@@ -110,6 +111,8 @@ export const removeFavoritePlaylist = async ({ playlistId }: { playlistId: strin
   try {
     console.log(`Removing playlist ${playlistId} from favorites`);
     const res = await apiClient.delete(`/playlists/favorites/${playlistId}`);
+    console.log('res', res.data);
+
     return res.data;
   } catch (error) {
     console.error('Error removing favorite playlist', error);
@@ -120,7 +123,9 @@ export const removeFavoritePlaylist = async ({ playlistId }: { playlistId: strin
 export const addAutoSortPlaylist = async ({ playlistId }: { playlistId: string }) => {
   try {
     console.log(`Adding auto-sort to playlist ${playlistId}`);
-    const res = await apiClient.post('/playlists/auto-sort/', { playlistId });
+    const res = await apiClient.post(`/playlists/auto-sort/${playlistId}`);
+    console.log('res', res.data);
+
     return res.data;
   } catch (error) {
     console.error('Error adding auto-sort playlist', error);
@@ -132,6 +137,7 @@ export const removeAutoSortPlaylist = async ({ playlistId }: { playlistId: strin
   try {
     console.log(`Removing auto-sort from playlist ${playlistId}`);
     const res = await apiClient.delete(`/playlists/auto-sort/${playlistId}`);
+    console.log('res', res.data);
     return res.data;
   } catch (error) {
     console.error('Error removing auto-sort playlist', error);

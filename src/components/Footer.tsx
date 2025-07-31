@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="mt-16 w-full border-t border-muted py-6 text-center text-sm text-muted-foreground">
+    <footer className="w-full border-t border-muted bg-background py-6 text-center text-sm text-muted-foreground">
       <p>
         Site developed by <span className="font-semibold text-foreground">julienprr</span>. Contact me at{' '}
         <a href="mailto:julienptt@example.com" className="underline hover:text-foreground">

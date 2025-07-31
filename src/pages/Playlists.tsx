@@ -15,7 +15,7 @@ const Playlists = () => {
 
   if (breakpoint === 'mobile') {
     return (
-      <div className="flex-col">
+      <div className="flex-col pt-5">
         <div className="mt-10 mb-5 text-center">
           <h2 className="text-2xl font-bold">My Playlists</h2>
         </div>

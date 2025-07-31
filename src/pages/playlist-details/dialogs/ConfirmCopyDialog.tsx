@@ -14,11 +14,15 @@ interface ConfirmCopyDialogProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   handleCopyPlaylist: (playlistDestinationId: string) => void;
-  playlist: PlaylistProps;
+  playlist?: PlaylistProps;
   playlists: PlaylistProps[];
 }
 
 const ConfirmCopyDialog = ({ isOpen, setIsOpen, handleCopyPlaylist, playlist, playlists }: ConfirmCopyDialogProps) => {
+
+  if (playlist == undefined) {
+    return null
+  }
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="rounded-lg border border-muted bg-background text-foreground shadow-xl sm:max-w-[425px]">
