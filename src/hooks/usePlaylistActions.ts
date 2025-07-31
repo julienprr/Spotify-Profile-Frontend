@@ -52,7 +52,6 @@ export const usePlaylistActions = () => {
   const handleSortPlaylist = async (playlistId: string) => {
     try {
       await dispatch(sortPlaylistByReleaseDate({ playlistId })).unwrap();
-      toast.success('Playlist sorted successfully');
     } catch (error: any) {
       toast.error(`Failed to sort playlist: ${error.message || error}`);
     }
@@ -61,7 +60,6 @@ export const usePlaylistActions = () => {
   const handleToggleFavorite = async (playlistId: string) => {
     try {
       await dispatch(toggleFavorite(playlistId)).unwrap();
-      toast.success('Favorite toggled successfully');
     } catch (error: any) {
       toast.error(`Failed to toggle favorite: ${error.message || error}`);
     }
