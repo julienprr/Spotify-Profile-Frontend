@@ -7,7 +7,7 @@ const Artist = ({ artist }: { artist: ArtistProps }) => {
   return (
     <div className="group flex cursor-pointer items-center space-x-4" onClick={() => navigate(`/artist/${artist.id}`)}>
       <div key={artist.id} className="shrink-0">
-        <div className="w-12 overflow-hidden rounded-full sm:w-[60px]">
+        <div className="h-[50px] w-[50px] overflow-hidden rounded-full sm:h-[60px] sm:w-[60px]">
           <img src={artist.imageUrl} alt={artist.name} className="h-auto w-full object-cover" />
         </div>
       </div>
