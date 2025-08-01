@@ -127,14 +127,9 @@ export const toggleFavorite = createAsyncThunk(
 export const toggleAutoSort = createAsyncThunk(
   'playlists/auto-sort/toggle',
   async (playlistId: string, { getState, dispatch, rejectWithValue }) => {
-    console.log('toggleAutoSort ', playlistId);
-
     try {
       const state = getState() as { playlists: PlaylistsState };
-      const playlist = state.playlists.selected[playlistId] || state.playlists.items.find((p) => p.id === playlistId); // ✅ Ajout ici
-
-      console.log('playlist', playlist);
-
+      const playlist = state.playlists.selected[playlistId] || state.playlists.items.find((p) => p.id === playlistId);
       if (!playlist) {
         throw new Error('Playlist not found in state');
       }
