@@ -8,8 +8,6 @@ export const usePlaylists = () => {
   const { items, status, error } = useSelector((state: RootState) => state.playlists);
 
   useEffect(() => {
-    console.log('playlists', items.length, 'status', status);
-
     if (status === 'idle') {
       dispatch(fetchPlaylists());
     }

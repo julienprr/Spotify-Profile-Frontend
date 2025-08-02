@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import apiClient from '@/api/apiClient';
 import { useAuth } from '@/contexts/AuthProvider';
 import ErrorFeedback from '@/components/ErrorFeedback';
+import { Button } from '@/components/ui/button';
 
 const Callback = () => {
   const navigate = useNavigate();
@@ -37,9 +38,7 @@ const Callback = () => {
         navigate('/', { replace: true });
       })
       .catch((error) => {
-        console.error('Error authenticating', error);
         setIsErrored(true);
-
         const errorMessage = error.response?.data?.message || error.message || 'Une erreur est survenue.';
         setMessage(errorMessage);
       });
@@ -47,7 +46,16 @@ const Callback = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      {isErrored ? <ErrorFeedback message={message} /> : <p className="">Connexion à Spotify en cours...</p>}
+      {isErrored ? (
+        <>
+          <ErrorFeedback message={message} />
+          <Button onClick={() => navigate('/')} variant="link" className="uppercase" size={'xxl'}>
+            Back to Homepage
+          </Button>
+        </>
+      ) : (
+        <p>Connexion à Spotify en cours...</p>
+      )}
     </div>
   );
 };
