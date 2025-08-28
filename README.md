@@ -9,6 +9,12 @@ Spotify Profile is a web application that allows you to manage and organize your
 
 ---
 
+## 🖥️ Backend
+
+The backend application documentation is available here: [**Play Manager**](https://github.com/julienprr/play-manager-backend)
+
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -102,7 +108,7 @@ For more details on the backend API and overall project structure, see [play-man
 
 ## 👨‍💻 Author
 
-Developed by [julienprr](https://github.com/julienprr)
+Julien Perrier – [julienprr.com](https://julienprr.com)
 
 ---
 
