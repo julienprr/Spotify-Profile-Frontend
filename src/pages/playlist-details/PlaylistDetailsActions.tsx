@@ -39,7 +39,6 @@ const Actions = ({
     return <ActionsSkeleton/>
   }
   return (
-
     <div className="my-4 flex flex-row items-center gap-1">
       <Button
         onClick={handleToggleFavorite}
@@ -77,7 +76,9 @@ const Actions = ({
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="action">
+          <Button
+            variant="action"
+          >
             <ListMusic className="h-4 w-4 text-foreground" />
             Manage
           </Button>
