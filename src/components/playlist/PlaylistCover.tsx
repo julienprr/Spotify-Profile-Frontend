@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import PlaylistCoverSkeleton from './PlaylistCoverSkeleton';
 import DefaultPlaylistCover from '@/assets/images/default_playlist_cover.jpg';
-import { Dot } from 'lucide-react';
+import LikedSongsCover from "@/assets/images/liked-songs-cover.jpg"
 
 type PlaylistCoverProps = {
   playlist?: PlaylistProps;
@@ -19,6 +19,14 @@ const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, vari
   if (isLoading || playlist == undefined) {
     return <PlaylistCoverSkeleton />;
   }
+
+  const displayCover = () => {
+    if (playlist.id == 'liked-songs') {
+      return LikedSongsCover;
+
+    }
+    return playlist.imageUrl ?? DefaultPlaylistCover;
+  };
 
   return (
     <div
@@ -36,7 +44,7 @@ const PlaylistCover: React.FC<PlaylistCoverProps> = ({ playlist, isLoading, vari
         )}
       >
         <img
-          src={playlist.imageUrl ?? DefaultPlaylistCover}
+          src={displayCover()}
           alt={playlist.name}
           className="h-full w-full object-cover transition-transform duration-300"
         />

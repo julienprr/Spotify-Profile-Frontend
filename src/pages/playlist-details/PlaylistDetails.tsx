@@ -41,7 +41,9 @@ const PlaylistDetails = () => {
   }
 
   usePlaylist(selectedId!);
-  const playlist = useSelector((state: RootState) => state.playlists.selected[selectedId!]) as PlaylistDetailsType | undefined;
+  const playlist = useSelector((state: RootState) => state.playlists.selected[selectedId!]) as
+    | PlaylistDetailsType
+    | undefined;
   const status = useSelector((state: RootState) => state.playlists.selectedStatus[selectedId]);
   const error = useSelector((state: RootState) => state.playlists.selectedError[selectedId]);
 

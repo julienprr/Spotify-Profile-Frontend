@@ -33,7 +33,7 @@ const ConfirmCopyDialog = ({ isOpen, setIsOpen, handleCopyPlaylist, playlist, pl
 
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-2 gap-2">
-            <Button variant="accent" onClick={() => handleCopyPlaylist('liked-tracks')}>
+            <Button variant="accent" onClick={() => handleCopyPlaylist('liked-songs')}>
               Titres likés
             </Button>
 
