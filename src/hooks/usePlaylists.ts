@@ -17,6 +17,9 @@ export const usePlaylists = () => {
   const isError = status === 'failed';
 
   const sortedPlaylists = [...items].sort((a, b) => {
+    if (a.id === 'liked-songs') return -1;
+    if (b.id === 'liked-songs') return 1;
+
     return (b.isFavorite ? 1 : 0) - (a.isFavorite ? 1 : 0);
   });
 
