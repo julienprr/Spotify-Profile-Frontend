@@ -5,7 +5,7 @@ export type PlaylistProps = {
   name: string;
   ownerName: string;
   description: string;
-  totalTracks: string;
+  totalTracks: number;
   imageUrl: string;
   spotifyUrl: string;
   public: boolean;
