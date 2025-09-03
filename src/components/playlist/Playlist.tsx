@@ -1,5 +1,6 @@
 import DefaultPlaylistCover from '@/assets/images/default_playlist_cover.jpg';
-import type { PlaylistProps } from '@/types/playlist';
+import LikedSongsCover from '@/assets/images/liked-songs-cover.jpg';
+import type { PlaylistProps, PlaylistSummary } from '@/types/playlist';
 import { Heart, RefreshCw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
@@ -13,13 +14,20 @@ const Playlist = ({
   handleToggleFavorite: (id: string) => void;
   handleToggleAutoSort: (id: string) => void;
 }) => {
+  const displayCover = () => {
+    if (playlist.id == 'liked-songs') {
+      return LikedSongsCover;
+    }
+    return playlist.imageUrl ?? DefaultPlaylistCover;
+  };
+
   const navigate = useNavigate();
   return (
     <div className="flex cursor-pointer items-center gap-2 rounded-md hover:bg-muted">
       <div key={playlist.id} className="shrink-0">
         <div className="w-12 overflow-hidden">
           <img
-            src={playlist.imageUrl ?? DefaultPlaylistCover}
+            src={displayCover()}
             alt={playlist.name}
             className="h-auto w-full object-cover"
           />
@@ -34,7 +42,9 @@ const Playlist = ({
           {playlist.name}
         </div>
         <div className="flex flex-row items-center space-x-1">
-          <span className="text-sm font-normal text-muted-foreground">{playlist.totalTracks} tracks</span>
+          <span className="text-sm font-normal text-muted-foreground">
+            {playlist.totalTracks} {playlist.totalTracks > 1 ? 'tracks' : 'track'}
+          </span>
         </div>
       </div>
 
